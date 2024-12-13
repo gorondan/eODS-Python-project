@@ -3,7 +3,6 @@ from custom_types import Gwei, Quota
 from validator import Validator
 
 class DelegatedValidator:
-
     initial_value: Gwei
     rewards: Gwei
     penalties: Gwei
