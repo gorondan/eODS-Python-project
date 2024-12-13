@@ -24,3 +24,14 @@ class ValidatorsRegistry:
             raise ValueError("Validator with the given validator ID is not in validators list")
         
         return self.validators_balances[validator_index]  
+        
+    def get_validator_by_id(self, validator_id : BLSPubkey):
+        """Helper function to find an existing validator by its ID."""
+        validator = None
+        
+        for v in self.validators:
+            if v.validator_id == validator_id:
+                validator = v
+                break
+        
+        return validator 
