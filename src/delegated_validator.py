@@ -29,9 +29,7 @@ class DelegatedValidator:
             for _ in range(delegator_index - num_delegated_balances + 1):
                 self.delegated_balances.append(0)
 
-        delegator_balance = self.delegated_balances[delegator_index] + amount
-        self.delegated_balances[delegator_index] = delegator_balance
-
+        self.delegated_balances[delegator_index] += amount
         self.validator_balance += amount   
 
         self._recalculate_quotas();     
