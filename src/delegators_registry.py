@@ -8,11 +8,11 @@ class DelegatorsRegistry:
 
     def __init__(self):
         # Delegators lists initialization
-        self.delegators = List[Delegator] = []     
-        self.delegators_balances = List[Gwei] = [] # Max size: DELEGATOR_REGISTRY_LIMIT
+        self.delegators = []     
+        self.delegators_balances = [] # Max size: DELEGATOR_REGISTRY_LIMIT
     
-    def delegate_amount(self, delegator_id: BLSPubkey, amount: Gwei):
-        delegator_index = self._get_delegator_index_by_id(delegator_id)
+    def delegate_amount(self, pubkey: BLSPubkey, amount: Gwei):
+        delegator_index = self._get_delegator_index_by_id(pubkey)
 
         if amount <= 0:
             raise ValueError("Delegated amount must be positive.")
@@ -24,11 +24,11 @@ class DelegatorsRegistry:
         # Removes the delegated amount from the delegator's balance
         self.delegators_balances[delegator_index] -= amount 
         
-    def deposit(self, delegator_id: BLSPubkey, amount: Gwei):
+    def deposit(self, pubkey: BLSPubkey, amount: Gwei):
         # If delegator does not exist, register the new delegator
-        delegator_index = self._get_delegator_index_by_id(delegator_id)
+        delegator_index = self._get_delegator_index_by_id(pubkey)
         if delegator_index == -1:
-            self._register_delegator(delegator_id)
+            self._register_delegator(pubkey)
         
         if amount <= 0:
             raise ValueError("Deposit amount must be positive.")
@@ -36,22 +36,22 @@ class DelegatorsRegistry:
         # Add the deposit amount to the delegator's balance
         self.delegators_balances[delegator_index] += amount
         
-    def _get_delegator_index_by_id(self, delegator_id : BLSPubkey):
+    def _get_delegator_index_by_id(self, pubkey : BLSPubkey):
         """Helper function to find a validator's index by its ID."""
         delegator_index = -1
 
         for index, delegator in enumerate(self.delegators):
-            if delegator.delegator_id == delegator_id:
+            if delegator.pubkey == pubkey:
                delegator_index = index
                break
 
         return delegator_index   
 
-    def _register_delegator(self, delegator_id : BLSPubkey):
+    def _register_delegator(self, pubkey : BLSPubkey):
         """Registers a delegator if not already registered and returns the delegator index."""
         
         # Register new delegator with a zero balance
-        new_delegator = Delegator(delegator_id)
+        new_delegator = Delegator(pubkey)
         self.delegators.append(new_delegator)
         self.delegators_balances.append(0)
 

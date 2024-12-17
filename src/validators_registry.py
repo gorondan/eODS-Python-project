@@ -11,12 +11,12 @@ class ValidatorsRegistry:
         self.validators = []     
         self.validators_balances = [] # Max size: VALIDATOR_REGISTRY_LIMIT
 
-    def get_validator_balance_by_id(self, validator_id : BLSPubkey):
+    def get_validator_balance_by_id(self, pubkey : BLSPubkey):
         """Helper function to find a validator's (existing) active balance by its ID."""
         validator_index = -1
 
         for index, validator in enumerate(self.validators):
-            if validator.validator_id == validator_id:
+            if validator.pubkey == pubkey:
                 validator_index = index
                 break
     
@@ -25,13 +25,13 @@ class ValidatorsRegistry:
         
         return self.validators_balances[validator_index]  
         
-    def get_validator_by_id(self, validator_id : BLSPubkey):
+    def get_validator_by_id(self, pubkey : BLSPubkey):
         """Helper function to find an existing validator by its ID."""
-        validator = None
+        validator = Validator()
         
         for v in self.validators:
-            if v.validator_id == validator_id:
+            if v.pubkey == pubkey:
                 validator = v
                 break
         
-        return validator 
+        return validator

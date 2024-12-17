@@ -1,11 +1,9 @@
 import numpy as np
-from custom_types import Gwei, Epoch
+from custom_types import Gwei, BLSPubkey, Epoch
 
 class Validator:
-    def __init__(self, validator_id):
-        self.validator_id = validator_id  # Unique identifier for each validator
-    
-        # pubkey = BLSPubkey # for the purpose of this pyproject, we work with validator_id instead of BLSPubkey, which will be used in the specs
+    def __init__(self):
+        self.pubkey = BLSPubkey # Unique identifier for each validator
         self.withdrawal_credentials: bytes = b'\x00' * 32  # Commitment to pubkey for withdrawals
         self.effective_balance = Gwei  # Balance at stake
         self.slashed: bool
