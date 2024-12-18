@@ -1,3 +1,4 @@
+import sys
 from typing import List
 from custom_types import Gwei, Quota
 from validator import Validator
@@ -73,5 +74,5 @@ class DelegatedValidator:
                 self.delegator_quotas.append(0)
 
         for index, delegated_amount in enumerate(self.delegated_balances):
-            self.delegator_quotas[index] = delegated_amount / (self.validator_balance - self.initial_value)
+            self.delegator_quotas[index] = delegated_amount / (self.validator_balance - self.initial_value + sys.float_info.min)
     
