@@ -20,6 +20,7 @@ class DelegatedValidatorsRegistry:
     def create_delegated_validator(self, validator: Validator, initial_balance: Gwei):
         delegated_validator = DelegatedValidator(validator, initial_balance)
         self.delegated_validators.append(delegated_validator)
+        validator.delegated = True
 
     def is_validator_delegated(self, pubkey: BLSPubkey):
         is_delegated = False
@@ -29,6 +30,10 @@ class DelegatedValidatorsRegistry:
                 break
 
         return is_delegated
+     
+    def process_rewards_penalties(self):
+        for delegated_validator in self.delegated_validators:
+            delegated_validator.process_rewards_penalties();
         
     def _get_delegated_validator_by_id(self, pubkey: BLSPubkey):
         delegated_validator = None

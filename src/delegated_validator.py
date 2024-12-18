@@ -37,7 +37,7 @@ class DelegatedValidator:
     def increase_balance(self, delegator_index: int, amount: Gwei):
         num_delegated_balances = len(self.delegated_balances)
 
-        if(num_delegated_balances < delegator_index):
+        if(num_delegated_balances <= delegator_index):
             for _ in range(delegator_index - num_delegated_balances + 1):
                 self.delegated_balances.append(0)
 
@@ -51,6 +51,18 @@ class DelegatedValidator:
 
         return withdrawable_amount
     
+    def process_rewards_penalties(self):
+        self._adjust_delegated_balances()
+        self.rewards = 0
+        self.penalties = 0
+    
+    def _adjust_delegated_balances(self):
+        self.validator_balance += self.rewards
+        self.validator_balance -= self.penalties
+        
+        for index in range(len(self.delegator_quotas)):
+            self.delegated_balances[index] = self.delegator_quotas[index] * self.validator_balance
+
     def _recalculate_quotas(self):
         num_delegated_balances = len(self.delegated_balances)
         num_delegator_quotas = len(self.delegator_quotas)

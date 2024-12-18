@@ -60,7 +60,9 @@ class DelegatorsRegistry:
         """Registers a delegator if not already registered and returns the delegator index."""
         
         # Register new delegator with a zero balance
-        new_delegator = Delegator(pubkey)
+        new_delegator = Delegator()
+        new_delegator.pubkey = pubkey
+        
         self.delegators.append(new_delegator)
         self.delegators_balances.append(0)
 

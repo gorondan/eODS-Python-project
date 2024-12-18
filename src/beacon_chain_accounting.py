@@ -19,7 +19,7 @@ class BeaconChainAccounting:
 
         if self.delegated_validators_registry.is_validator_delegated(validator.pubkey) == False:
             self.delegated_validators_registry.create_delegated_validator(validator, amount)
-
+   
         self.delegated_validators_registry.process_delegation(delegator_index, validator.pubkey, amount)
 
     def withdraw(self, delegator_index: DelegatorIndex, validator_pubkey: BLSPubkey, amount: Gwei):
