@@ -1,6 +1,7 @@
 from beacon_chain_accounting import BeaconChainAccounting
 from simulator import Simulator
 from simulation_constants import num_ticks
+from tester import Tester
 
 beacon_chain_accounting = BeaconChainAccounting()
 
@@ -11,6 +12,6 @@ for _ in range(num_ticks):
     simulator.tick_delegation()
     simulator.process_rewards_penalties()
 
+tester = Tester(beacon_chain_accounting)
 
-
-print("")
+assert(tester.test_quotas_sum_to_be_1())
