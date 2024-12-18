@@ -1,12 +1,14 @@
 import random
 import secrets
+import math
+from numpy import mat
+from pydantic import ConstrainedStr
 from beacon_chain_accounting import BeaconChainAccounting
-from delegators_registry import DelegatorsRegistry
-import delegators_registry
-from validators_registry import ValidatorsRegistry
+import beacon_chain_accounting
+import delegated_validator
 import simulation_constants as constants
 from validator import Validator
-import validators_registry
+
 
 class Simulator: 
     beacon_chain_accounting: BeaconChainAccounting
@@ -27,7 +29,7 @@ class Simulator:
             validator.effective_balance = validator_initial_balance # + histeresys in the future
             validator.slashed = False
             validator.delegated = False
-
+            validator.fee_percentage = constants.validators_withdrawal_fee_percentage
             self.beacon_chain_accounting.validators_registry.validators.append(validator)
 
         # generate the delegators    
@@ -55,6 +57,26 @@ class Simulator:
             
             self.beacon_chain_accounting.delegate(delegator_index, validator_key, delegated_amount)
 
+    def tick_withdrawals(self):
+        num_withdrawals = random.randint(constants.min_withdrawals_per_tick, constants.max_withdrawals_per_tick)
+        
+        for _ in range(num_withdrawals):
+            delegated_validator_index = random.randrange(0, len(self.beacon_chain_accounting.delegated_validators_registry.delegated_validators))
+
+            delegated_validator = self.beacon_chain_accounting.delegated_validators_registry.delegated_validators[delegated_validator_index]
+            
+            matching_indices = [i for i, delegator_balance in enumerate(delegated_validator.delegated_balances) if delegator_balance > 0]
+
+            if len(matching_indices) > 0:
+
+                index = random.randrange(0, len(matching_indices))
+
+                delegator_index = matching_indices[index]
+                
+                withdrawed_amount = random.randint(0, math.floor(delegated_validator.delegated_balances[delegator_index]))
+
+                self.beacon_chain_accounting.withdraw(delegator_index, delegated_validator.delegated_validator.pubkey, withdrawed_amount)
+        
     def process_rewards_penalties(self):
         delegated_validators = self.beacon_chain_accounting.delegated_validators_registry.delegated_validators
         
