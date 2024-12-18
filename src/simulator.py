@@ -1,18 +1,19 @@
 import random
 from delegators_registry import DelegatorsRegistry
 from validators_registry import ValidatorsRegistry
-from simulation_constants import min_validators, max_validators, min_validator_initial_balance, max_validator_initial_balance
+import simulation_constants as constants
 from validator import Validator
 
-class Simulator:
+class Simulator: 
     def __init__(self):
         pass
 
     def initialize_required_data(self, validators_registry: ValidatorsRegistry, delegators_registry: DelegatorsRegistry):
-        num_validators_to_generate = random.randint(min_validators, max_validators)
+        # generate the validators
+        num_validators_to_generate = random.randint(constants.min_validators, constants.max_validators)
         
         for _ in range(num_validators_to_generate):
-            validator_initial_balance = random.randint(min_validator_initial_balance, max_validator_initial_balance)
+            validator_initial_balance = random.randint(constants.min_validator_initial_balance, constants.max_validator_initial_balance)
             validators_registry.validators_balances.append(validator_initial_balance)
 
             validator = Validator()
@@ -22,6 +23,13 @@ class Simulator:
             validator.delegated = False
 
             validators_registry.validators.append(validator)
-        
 
-        print("done")
+        # generate the delegators    
+        num_delegators_to_generate = random.randint(constants.min_delegators, constants.max_delegators)
+        for _ in range(num_delegators_to_generate):
+            delegators_registry.deposit(
+                f"{random.getrandbits(32):08x}", 
+                random.randint(constants.min_delegator_deposit, constants.max_delegator_deposit)
+                )
+
+        print('')
