@@ -1,16 +1,15 @@
 from beacon_chain_accounting import BeaconChainAccounting
 from simulator import Simulator
+from simulation_constants import num_ticks
 
 beacon_chain_accounting = BeaconChainAccounting()
 
 
-simulator = Simulator()
-simulator.initialize_required_data(
-    beacon_chain_accounting.validators_registry, 
-    beacon_chain_accounting.delegators_registry
-    )
+simulator = Simulator(beacon_chain_accounting)
+simulator.initialize_required_data()
 
-
+for _ in range(num_ticks):
+    simulator.tick_delegation()
 
 beacon_chain_accounting.test_generate_test_data()
 

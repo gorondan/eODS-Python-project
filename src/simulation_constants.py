@@ -9,3 +9,11 @@ max_delegators = 500
 
 min_delegator_deposit = 100
 max_delegator_deposit = 500
+
+min_delegations_per_tick = 100
+max_delegations_per_tick = 500
+
+min_delegated_amount = 5
+max_delegated_amount = 10
+
+num_ticks = 100
