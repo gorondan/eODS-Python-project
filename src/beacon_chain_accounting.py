@@ -21,7 +21,3 @@ class BeaconChainAccounting:
             self.delegated_validators_registry.create_delegated_validator(validator, amount)
 
         self.delegated_validators_registry.process_delegation(delegator_index, validator.pubkey, amount)    
-
-    def test_generate_test_data(self):
-        print("Data generated")
-        

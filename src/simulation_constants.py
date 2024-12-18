@@ -16,4 +16,13 @@ max_delegations_per_tick = 500
 min_delegated_amount = 5
 max_delegated_amount = 10
 
+min_reward = 1
+max_reward = 5
+
+min_penalty = 1
+max_penalty = 5
+
+min_slash = 16
+max_slash = 32
+
 num_ticks = 100

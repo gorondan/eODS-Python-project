@@ -55,4 +55,21 @@ class Simulator:
             
             self.beacon_chain_accounting.delegate(delegator_index, validator_key, delegated_amount)
 
+    def process_rewards_penalties(self):
+        delegated_validators = self.beacon_chain_accounting.delegated_validators_registry.delegated_validators
+        
+        for delegated_validator in delegated_validators:
+            reward = random.randint(constants.min_reward, constants.max_reward)
+            penalties  = random.randint(constants.min_penalty, constants.max_penalty)
+            slash  = random.randint(constants.min_slash, constants.max_slash)
+            
+            probability = random.randint(0,100)
+            if(probability > 99):
+                delegated_validator.penalties += slash
+            if(probability > 70):
+                delegated_validator.penalties += penalties
+            elif(probability > 30):
+                delegated_validator.rewards += reward  
+        
+        self.beacon_chain_accounting.delegated_validators_registry.process_rewards_penalties()
             

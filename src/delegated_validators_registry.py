@@ -26,6 +26,10 @@ class DelegatedValidatorsRegistry:
                 break
 
         return is_delegated
+     
+    def process_rewards_penalties(self):
+        for delegated_validator in self.delegated_validators:
+            delegated_validator.process_rewards_penalties();
         
     def _get_delegated_validator_by_id(self, pubkey: BLSPubkey):
         delegated_validator = None
