@@ -64,11 +64,11 @@ class Simulator:
             slash  = random.randint(constants.min_slash, constants.max_slash)
             
             probability = random.randint(0,100)
-            if(probability > 99):
+            if(probability >= 99):
                 delegated_validator.penalties += slash
-            if(probability > 70):
+            if(probability >= 70):
                 delegated_validator.penalties += penalties
-            elif(probability > 30):
+            elif(probability >= 30):
                 delegated_validator.rewards += reward  
         
         self.beacon_chain_accounting.delegated_validators_registry.process_rewards_penalties()
