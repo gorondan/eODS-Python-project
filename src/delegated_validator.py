@@ -23,12 +23,13 @@ class DelegatedValidator:
         self.validator_balance = initial_value
 
     def decrease_balance(self, delegator_index: int, amount: Gwei):
+        delegator_available_balance = self.delegated_balances[delegator_index]
         withdrawable_amount = self._calculate_withdrawable_amount(amount)
 
-        if self.delegated_balances[delegator_index] - withdrawable_amount < 0:
+        if delegator_available_balance - withdrawable_amount < 0:
             raise ValueError("Insuficient balance: The delegator's balance for this Validator is smaller than the amount")
 
-        self.delegated_balances[delegator_index] -= withdrawable_amount
+        delegator_available_balance -= withdrawable_amount
         self.validator_balance -= withdrawable_amount
 
         self._recalculate_quotas()
