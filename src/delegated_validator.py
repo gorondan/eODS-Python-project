@@ -48,8 +48,8 @@ class DelegatedValidator:
         self._recalculate_quotas()
 
     def _calculate_withdrawable_amount(self, amount: Gwei):
-        withdrawable_amount = amount - self.delegated_validator.fee
-
+        withdrawable_amount = amount - 1 / self.delegated_validator.fee_percentage * amount
+        
         return withdrawable_amount
     
     def process_rewards_penalties(self):
