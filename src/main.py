@@ -11,7 +11,10 @@ simulator.initialize_required_data()
 for _ in range(num_ticks):
     simulator.tick_delegation()
     simulator.process_rewards_penalties()
+    simulator.tick_withdrawals()
 
 tester = Tester(beacon_chain_accounting)
 
 assert(tester.test_quotas_sum_to_be_1())
+   
+print("")

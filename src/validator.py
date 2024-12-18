@@ -13,4 +13,4 @@ class Validator:
         self.exit_epoch = Epoch
         self.withdrawable_epoch = Epoch  # When validator can withdraw funds
         self.delegated: bool # new in eODS
-        self.fee: Fee # new in eODS
+        self.fee_percentage: Fee # new in eODS
