@@ -1,11 +1,7 @@
 import random
 import secrets
 import math
-from numpy import mat
-from pydantic import ConstrainedStr
 from beacon_chain_accounting import BeaconChainAccounting
-import beacon_chain_accounting
-import delegated_validator
 import simulation_constants as constants
 from validator import Validator
 
