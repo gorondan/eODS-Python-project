@@ -16,6 +16,7 @@ class DelegatedValidatorsRegistry:
     def create_delegated_validator(self, validator: Validator, initial_balance: Gwei):
         delegated_validator = DelegatedValidator(validator, initial_balance)
         self.delegated_validators.append(delegated_validator)
+        validator.delegated = True
 
     def is_validator_delegated(self, pubkey: BLSPubkey):
         is_delegated = False
