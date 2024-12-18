@@ -1,5 +1,5 @@
 import numpy as np
-from custom_types import Gwei, BLSPubkey, Epoch
+from custom_types import Gwei, BLSPubkey, Epoch, Fee
 
 class Validator:
     def __init__(self):
@@ -13,3 +13,4 @@ class Validator:
         self.exit_epoch = Epoch
         self.withdrawable_epoch = Epoch  # When validator can withdraw funds
         self.delegated: bool # new in eODS
+        self.fee: Fee # new in eODS

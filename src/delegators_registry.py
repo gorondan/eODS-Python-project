@@ -35,6 +35,15 @@ class DelegatorsRegistry:
         
         # Add the deposit amount to the delegator's balance
         self.delegators_balances[delegator_index] += amount
+
+    def withdraw_amount(self, pubkey: BLSPubkey, amount: Gwei):
+        delegator_index = self._get_delegator_index_by_id(pubkey)
+
+        if amount <= 0:
+            raise ValueError("Withdrawed amount must be positive.")
+        
+        # Adds the withdrawed amount back to the delegator's balance
+        self.delegators_balances[delegator_index] += amount 
         
     def _get_delegator_index_by_id(self, pubkey : BLSPubkey):
         """Helper function to find a validator's index by its ID."""
