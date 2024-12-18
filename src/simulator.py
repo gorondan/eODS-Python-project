@@ -1,4 +1,5 @@
 import random
+import secrets
 from delegators_registry import DelegatorsRegistry
 from validators_registry import ValidatorsRegistry
 import simulation_constants as constants
@@ -17,7 +18,7 @@ class Simulator:
             validators_registry.validators_balances.append(validator_initial_balance)
 
             validator = Validator()
-            validator.pubkey = f"{random.getrandbits(32):08x}"
+            validator.pubkey = secrets.token_hex(32)
             validator.effective_balance = validator_initial_balance # + histeresys in the future
             validator.slashed = False
             validator.delegated = False
@@ -28,8 +29,9 @@ class Simulator:
         num_delegators_to_generate = random.randint(constants.min_delegators, constants.max_delegators)
         for _ in range(num_delegators_to_generate):
             delegators_registry.deposit(
-                f"{random.getrandbits(32):08x}", 
+                secrets.token_hex(32), 
                 random.randint(constants.min_delegator_deposit, constants.max_delegator_deposit)
                 )
-
-        print('')
+    
+    def tick_delegation(self):
+        pass    
