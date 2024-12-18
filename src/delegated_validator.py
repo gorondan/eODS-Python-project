@@ -62,7 +62,7 @@ class DelegatedValidator:
         self.validator_balance -= self.penalties
         
         for index in range(len(self.delegator_quotas)):
-            self.delegated_balances[index] = self.delegator_quotas[index] * self.validator_balance
+            self.delegated_balances[index] = (self.validator_balance - self.initial_value) * self.delegator_quotas[index]
 
     def _recalculate_quotas(self):
         num_delegated_balances = len(self.delegated_balances)
