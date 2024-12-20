@@ -1,8 +1,8 @@
 min_validators = 100
 max_validators = 500
  
-min_validator_initial_balance = 100
-max_validator_initial_balance = 500
+min_validator_initial_balance = 32
+max_validator_initial_balance = 33
 
 min_delegators = 100
 max_delegators = 500
@@ -14,7 +14,7 @@ min_delegations_per_tick = 0
 max_delegations_per_tick = 500
 
 min_delegated_amount = 1
-max_delegated_amount = 1000
+max_delegated_amount = 100
 
 min_withdrawals_per_tick = 0
 max_withdrawals_per_tick = 100
@@ -32,5 +32,7 @@ min_slash = 16
 max_slash = 32
 
 num_ticks = 100
+
+MIN_ACTIVATION_BALANCE = 32
 
 validators_withdrawal_fee_percentage = 10
