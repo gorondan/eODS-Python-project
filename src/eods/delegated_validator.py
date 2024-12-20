@@ -1,7 +1,7 @@
 import sys
 from typing import List
-from custom_types import Gwei, Quota
-from validator import Validator
+from eods.custom_types import Gwei, Quota
+from protocol.validator import Validator
 
 class DelegatedValidator:
     initial_value: Gwei

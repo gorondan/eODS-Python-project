@@ -1,12 +1,12 @@
 from typing import List
-from custom_types import Gwei, BLSPubkey
-from validator import Validator
+from eods.custom_types import Gwei, BLSPubkey
+from protocol.validator import Validator
 
 class ValidatorsRegistry:
     validators: List[Validator]  # Stores existing validators' data as a list of Delegator instances.
     validators_balances: List[Gwei]  # List of Gwei existing validators' balances
 
-    def __init__(self):
+    def __init__(self): 
         # Validators lists initialization
         self.validators = []     
         self.validators_balances = [] # Max size: VALIDATOR_REGISTRY_LIMIT

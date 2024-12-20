@@ -1,7 +1,8 @@
-from delegated_validators_registry import DelegatedValidatorsRegistry
-from custom_types import BLSPubkey, Gwei, DelegatorIndex
-from delegators_registry import DelegatorsRegistry
-from validators_registry import ValidatorsRegistry
+from eods import delegated_validators_registry
+from eods.delegated_validators_registry import DelegatedValidatorsRegistry
+from eods.custom_types import BLSPubkey, Gwei, DelegatorIndex
+from eods.delegators_registry import DelegatorsRegistry
+from protocol.validators_registry import ValidatorsRegistry
 
 class BeaconChainAccounting:
     delegators_registry: DelegatorsRegistry
@@ -35,4 +36,3 @@ class BeaconChainAccounting:
 
     def test_generate_test_data(self):
         print("Data generated")
-        

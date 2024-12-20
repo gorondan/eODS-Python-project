@@ -1,6 +1,6 @@
 from typing import List
-from custom_types import Gwei, BLSPubkey
-from delegator import Delegator
+from eods.custom_types import Gwei, BLSPubkey
+from eods.delegator import Delegator
 
 class DelegatorsRegistry:
     delegators: List[Delegator]  # Stores delegators' data as a list of Delegator instances.

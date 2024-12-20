@@ -1,5 +1,5 @@
 import numpy as np
-from custom_types import Gwei, BLSPubkey, Epoch
+from eods.custom_types import Gwei, BLSPubkey, Epoch
 
 class Delegator:
     def __init__(self):

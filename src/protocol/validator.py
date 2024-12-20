@@ -1,5 +1,5 @@
 import numpy as np
-from custom_types import Gwei, BLSPubkey, Epoch, Fee
+from eods.custom_types import Gwei, BLSPubkey, Epoch, Fee
 
 class Validator:
     def __init__(self):

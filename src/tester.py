@@ -1,5 +1,5 @@
 import math
-from beacon_chain_accounting import BeaconChainAccounting
+from eods.beacon_chain_accounting import BeaconChainAccounting
 
 class Tester:
     beacon_chain_accounting: BeaconChainAccounting

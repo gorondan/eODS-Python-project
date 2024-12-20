@@ -1,4 +1,8 @@
-from beacon_chain_accounting import BeaconChainAccounting
+"""
+eODS
+"""
+
+from eods.beacon_chain_accounting import BeaconChainAccounting
 from simulator import Simulator
 from simulation_constants import num_ticks
 from tester import Tester
@@ -15,6 +19,4 @@ for _ in range(num_ticks):
 
 tester = Tester(beacon_chain_accounting)
 
-assert(tester.test_quotas_sum_to_be_1())
-   
-print("")
+assert tester.test_quotas_sum_to_be_1()

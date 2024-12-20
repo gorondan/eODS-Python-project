@@ -1,7 +1,7 @@
 from typing import List
-from validator import Validator
-from custom_types import Gwei, DelegatorIndex, BLSPubkey
-from delegated_validator import DelegatedValidator
+from protocol.validator import Validator
+from eods.custom_types import Gwei, DelegatorIndex, BLSPubkey
+from eods.delegated_validator import DelegatedValidator
 
 class DelegatedValidatorsRegistry:
     delegated_validators: List[DelegatedValidator]

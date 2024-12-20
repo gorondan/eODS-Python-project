@@ -1,9 +1,9 @@
 import random
 import secrets
 import math
-from beacon_chain_accounting import BeaconChainAccounting
+from eods.beacon_chain_accounting import BeaconChainAccounting
 import simulation_constants as constants
-from validator import Validator
+from protocol.validator import Validator
 
 
 class Simulator: 
