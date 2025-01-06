@@ -1,4 +1,6 @@
-import numpy as np
+"""
+This module defines the attributes of class Delegator
+"""
 from eods.custom_types import Gwei, BLSPubkey, Epoch
 
 class Delegator:

@@ -1,3 +1,6 @@
+"""
+This module defines the methods that modify the state of the delegated validators registry
+"""
 from typing import List
 from protocol.validator import Validator
 from eods.custom_types import Gwei, DelegatorIndex, BLSPubkey
@@ -30,11 +33,11 @@ class DelegatedValidatorsRegistry:
                 break
 
         return is_delegated
-     
+
     def process_rewards_penalties(self):
         for delegated_validator in self.delegated_validators:
             delegated_validator.process_rewards_penalties()
-        
+      
     def _get_delegated_validator_by_id(self, pubkey: BLSPubkey):
         delegated_validator = None
         for dv in self.delegated_validators:
@@ -43,4 +46,3 @@ class DelegatedValidatorsRegistry:
                 break
         return delegated_validator
     
-
