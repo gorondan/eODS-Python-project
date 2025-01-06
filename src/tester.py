@@ -19,5 +19,5 @@ class Tester:
             if(math.isclose(sum_quota, 1, rel_tol=0, abs_tol=1e-8) == False):
                 print(sum_quota)
                 return False  
-            
-        return True    
+        return True
+     

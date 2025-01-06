@@ -78,9 +78,9 @@ class Simulator:
 
         for delegated_validator in delegated_validators:
             weight = delegated_validator.validator_balance / constants.MIN_ACTIVATION_BALANCE
-            reward = random.randint(constants.min_reward, constants.max_reward) * weight / 1e4
-            penalties  = random.randint(constants.min_penalty, constants.max_penalty) / 1e4
-            slash  = random.randint(constants.min_slash, constants.max_slash)
+            reward = constants.B * weight 
+            penalties  = constants.B * weight 
+            slash  = random.randint(constants.min_slash, constants.max_slash) * weight
             
             probability = random.randint(0,100)
             if(probability >= 99):
