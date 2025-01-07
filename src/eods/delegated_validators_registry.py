@@ -12,14 +12,6 @@ class DelegatedValidatorsRegistry:
     def __init__(self):
         self.delegated_validators = []
 
-    def process_delegation(self, delegator_index: DelegatorIndex, pubkey: BLSPubkey, amount: Gwei):
-        delegated_validator = self._get_delegated_validator_by_id(pubkey)
-        delegated_validator.increase_balance(delegator_index, amount)
-
-    def process_withdrawal(self, delegator_index: DelegatorIndex, pubkey: BLSPubkey, amount: Gwei):
-        delegated_validator = self._get_delegated_validator_by_id(pubkey)
-        delegated_validator.decrease_balance(delegator_index, amount)
-
     def create_delegated_validator(self, validator: Validator, initial_balance: Gwei):
         delegated_validator = DelegatedValidator(validator, initial_balance)
         self.delegated_validators.append(delegated_validator)
@@ -33,6 +25,14 @@ class DelegatedValidatorsRegistry:
                 break
 
         return is_delegated
+
+    def process_delegation(self, delegator_index: DelegatorIndex, pubkey: BLSPubkey, amount: Gwei):
+        delegated_validator = self._get_delegated_validator_by_id(pubkey)
+        delegated_validator.process_delegation(delegator_index, amount)
+
+    def process_withdrawal(self, delegator_index: DelegatorIndex, pubkey: BLSPubkey, amount: Gwei):
+        delegated_validator = self._get_delegated_validator_by_id(pubkey)
+        delegated_validator.process_withdrawal(delegator_index, amount)
 
     def process_rewards_penalties(self):
         for delegated_validator in self.delegated_validators:
