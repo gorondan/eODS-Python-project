@@ -10,31 +10,41 @@ class DelegatedValidator:
     validator_balance: Gwei
 
     delegated_validator: Validator
+    validator_quota: Quota
     delegator_quotas: List[Quota]
     delegated_balances: List[Gwei]
+    total_delegated_balance: Gwei
 
     def __init__(self, validator: Validator, initial_balance: Gwei):
         self.delegated_validator = validator
         self.initial_balance = initial_balance
+        self.validator_balance = self.initial_balance
+        #validator.effective_balance = self.validator_balance
         
+        self.validator_quota = 1
         self.delegator_quotas = [0]
         self.delegated_balances = [0]
+        self.total_delegated_balance = 0
         self.rewards = 0
         self.penalties = 0
-        self.validator_balance = initial_balance
-        self.delegated_validator.effective_balance = self.validator_balance
+        
 
     def process_withdrawal(self, delegator_index: int, amount: Gwei):
         """
         Method to process a withdrawal of balance from the delegated validator towards a delegator with `delegator_index`
         """
+
+        if amount > self.delegated_balances[delegator_index]:
+            amount = self.delegated_balances[delegator_index]     
+
         withdrawable_amount = self._calculate_withdrawable_amount(amount)
 
-        # Deducts the withdrawed amount from the delegated balances with underflow protection
-        self.delegated_balances[delegator_index] = 0 if withdrawable_amount > self.delegated_balances[delegator_index] else self.delegated_balances[delegator_index] - withdrawable_amount
-        
+        self.delegated_balances[delegator_index] -= withdrawable_amount
+
+        self.total_delegated_balance -= withdrawable_amount
+
         # Decreases the delegated validator's balance with withdrawable amount
-        self._decrease_balance(amount)
+        self._decrease_balance(withdrawable_amount)
 
         self._recalculate_quotas()
 
@@ -50,12 +60,14 @@ class DelegatedValidator:
         
         self.delegated_balances[delegator_index] += amount
 
+        self.total_delegated_balance += amount
+
         self._increase_balance(amount)
 
         self._recalculate_quotas()
 
     def process_rewards_penalties(self):
-        self._adjust_delegated_balances()
+      #  self._adjust_delegated_balances()
         self.rewards = 0
         self.penalties = 0
        
@@ -64,7 +76,7 @@ class DelegatedValidator:
         self._decrease_balance(self.penalties)
         
         for index in range(len(self.delegator_quotas)):
-            self.delegated_balances[index] = (self.validator_balance - self.initial_balance) * self.delegator_quotas[index]
+            self.delegated_balances[index] = self.validator_balance * self.delegator_quotas[index]
 
     def _calculate_withdrawable_amount(self, amount: Gwei):
         withdrawable_amount = amount * (1 - self.delegated_validator.fee_percentage / 100)
@@ -76,7 +88,7 @@ class DelegatedValidator:
         Method to decrease the delegated validator's balance with `delta`, with underflow protection
         """
         
-        self.validator_balance = 0 if delta > self.validator_balance else self.validator_balance - delta
+        self.validator_balance -= delta
 
     def _increase_balance(self, delta: Gwei):
         """
@@ -92,7 +104,10 @@ class DelegatedValidator:
         if(num_delegator_quotas < num_delegated_balances):
             for _ in range(num_delegated_balances - num_delegator_quotas):
                 self.delegator_quotas.append(0)
+        
+        # Calculates the validator's quota from from the active balance, based on it's initial balance
+        self.validator_quota = 1 if self.total_delegated_balance == 0 else (self.validator_balance - self.total_delegated_balance) / self.validator_balance
 
         for index, delegated_amount in enumerate(self.delegated_balances):
-            self.delegator_quotas[index] = delegated_amount / (self.validator_balance - self.initial_balance)
+            self.delegator_quotas[index] = 0 if self.validator_balance ==0 or self.total_delegated_balance  == 0 else delegated_amount / self.validator_balance
     
