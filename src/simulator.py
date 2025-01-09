@@ -81,7 +81,7 @@ class Simulator:
             reward = constants.B * weight 
             penalties  = constants.B * weight 
             slash  = random.randint(constants.min_slash, constants.max_slash) * weight
-            
+  
             probability = random.randint(0,100)
             if(probability >= 99):
                 delegated_validator.penalties += slash

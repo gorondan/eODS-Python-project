@@ -5,7 +5,7 @@ min_validator_initial_balance = 32
 max_validator_initial_balance = 2048
 
 min_delegators = 128
-max_delegators = 1024
+max_delegators = 512
 
 min_delegator_deposit = 32
 max_delegator_deposit = 2048
@@ -28,14 +28,10 @@ MIN_ACTIVATION_BALANCE = 32
 MAX_EFFECTIVE_BALANCE_ELECTRA = 2048
 
 # Rewards and penalties
-"""
-min_reward = 1
-max_reward = 5
-"""
 
 EFFECTIVE_BALANCE_INCREMENT = 1
 
-B = 32 * EFFECTIVE_BALANCE_INCREMENT / 1e9
+B = 32 * EFFECTIVE_BALANCE_INCREMENT / 1e9 # Base reward
 
 min_slash = 1
 max_slash = 16

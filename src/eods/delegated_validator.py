@@ -96,7 +96,6 @@ class DelegatedValidator:
         for index in range(len(self.delegator_quotas)):
             self.delegated_balances[index] = self.validator_balance * self.delegator_quotas[index]
         
-        # self.total_delegated_balance = sum(self.delegated_balances)
         self.total_delegated_balance += (1 - self.validator_quota) * self.rewards
         self.total_delegated_balance -= (1 - self.validator_quota) * self.penalties
 

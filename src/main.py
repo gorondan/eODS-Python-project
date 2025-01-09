@@ -22,5 +22,8 @@ class Main:
 
     tester = Tester(beacon_chain_accounting)
     assert tester.test_quotas_sum_to_be_1()
+    assert tester.test_delegated_amount_is_positive()
 
 run = Main()
+
+print("")
