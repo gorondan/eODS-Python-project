@@ -4,7 +4,7 @@ from eods.custom_types import Gwei, Quota
 from protocol.validator import Validator
 
 class DelegatedValidator:
-    initial_value: Gwei
+    initial_balance: Gwei
     rewards: Gwei
     penalties: Gwei
     validator_balance: Gwei
@@ -13,15 +13,16 @@ class DelegatedValidator:
     delegator_quotas: List[Quota]
     delegated_balances: List[Gwei]
 
-    def __init__(self, validator: Validator, initial_value: Gwei):
+    def __init__(self, validator: Validator, initial_balance: Gwei):
         self.delegated_validator = validator
-        self.initial_value = initial_value
+        self.initial_value = initial_balance
         
         self.delegator_quotas = [0]
         self.delegated_balances = [0]
         self.rewards = 0
         self.penalties = 0
-        self.validator_balance = initial_value
+        self.validator_balance = initial_balance
+        self.delegated_validator.effective_balance = self.validator_balance
 
     def process_withdrawal(self, delegator_index: int, amount: Gwei):
         """
@@ -32,6 +33,7 @@ class DelegatedValidator:
         # Deducts the withdrawed amount from the delegated balances with underflow protection
         self.delegated_balances[delegator_index] = 0 if withdrawable_amount > self.delegated_balances[delegator_index] else self.delegated_balances[delegator_index] - withdrawable_amount
         
+        # Decreases the delegated validator's balance with withdrawable amount
         self._decrease_balance(amount)
 
         self._recalculate_quotas()
@@ -92,5 +94,5 @@ class DelegatedValidator:
                 self.delegator_quotas.append(0)
 
         for index, delegated_amount in enumerate(self.delegated_balances):
-            self.delegator_quotas[index] = delegated_amount / (self.validator_balance - self.initial_value)
+            self.delegator_quotas[index] = delegated_amount / (self.validator_balance - self.initial_balance)
     
