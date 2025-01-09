@@ -9,6 +9,11 @@ class DelegatedValidator:
     penalties: Gwei
     validator_balance: Gwei
 
+    debug_total_rewards: Gwei
+    debug_total_penalties: Gwei
+    debug_total_delegated: Gwei
+    debug_total_withdrawn: Gwei
+
     delegated_validator: Validator
     validator_quota: Quota
     delegator_quotas: List[Quota]
@@ -27,6 +32,11 @@ class DelegatedValidator:
         self.total_delegated_balance = 0
         self.rewards = 0
         self.penalties = 0
+
+        self.debug_total_delegated = 0
+        self.debug_total_withdrawn = 0
+        self.debug_total_rewards = 0
+        self.debug_total_penalties = 0
         
 
     def process_withdrawal(self, delegator_index: int, amount: Gwei):
@@ -48,6 +58,8 @@ class DelegatedValidator:
 
         self._recalculate_quotas()
 
+        self.debug_total_withdrawn += withdrawable_amount
+
     def process_delegation(self, delegator_index: int, amount: Gwei):
         """
         Method to process a delegation from a delegator with `delegator_index` towards the delegated validator
@@ -66,17 +78,27 @@ class DelegatedValidator:
 
         self._recalculate_quotas()
 
+        self.debug_total_delegated += amount
+
     def process_rewards_penalties(self):
-      #  self._adjust_delegated_balances()
+        self._adjust_delegated_balances()
+
+        self.debug_total_rewards += self.rewards
+        self.debug_total_penalties += self.penalties
+
         self.rewards = 0
         self.penalties = 0
        
     def _adjust_delegated_balances(self):
         self._increase_balance(self.rewards)
         self._decrease_balance(self.penalties)
-        
+
         for index in range(len(self.delegator_quotas)):
             self.delegated_balances[index] = self.validator_balance * self.delegator_quotas[index]
+        
+        # self.total_delegated_balance = sum(self.delegated_balances)
+        self.total_delegated_balance += (1 - self.validator_quota) * self.rewards
+        self.total_delegated_balance -= (1 - self.validator_quota) * self.penalties
 
     def _calculate_withdrawable_amount(self, amount: Gwei):
         withdrawable_amount = amount * (1 - self.delegated_validator.fee_percentage / 100)
