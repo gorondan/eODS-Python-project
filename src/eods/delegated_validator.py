@@ -65,7 +65,7 @@ class DelegatedValidator:
             self.delegated_balances[index] = (self.validator_balance - self.initial_value) * self.delegator_quotas[index]
 
     def _calculate_withdrawable_amount(self, amount: Gwei):
-        withdrawable_amount = amount - 1 / self.delegated_validator.fee_percentage * amount
+        withdrawable_amount = amount * (1 - self.delegated_validator.fee_percentage / 100)
         
         return withdrawable_amount
 
@@ -92,5 +92,5 @@ class DelegatedValidator:
                 self.delegator_quotas.append(0)
 
         for index, delegated_amount in enumerate(self.delegated_balances):
-            self.delegator_quotas[index] = delegated_amount / (self.validator_balance - self.initial_value + sys.float_info.min)
+            self.delegator_quotas[index] = delegated_amount / (self.validator_balance - self.initial_value)
     
