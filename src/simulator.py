@@ -5,21 +5,24 @@ from eods.beacon_chain_accounting import BeaconChainAccounting
 import simulation_constants as constants
 from protocol.validator import Validator
 
-"""
-The Simulator operates in discrete 'ticks' over a defined number of iterations. 
-During each tick, it generates new delegations, applies rewards, penalties, and slashings, 
-and processes withdrawals.
-"""
+
 class Simulator: 
+    """
+    The Simulator operates in discrete 'ticks' over a defined number of iterations. 
+    During each tick, it generates new delegations, applies rewards, penalties, and slashings, 
+    and processes withdrawals.
+    """
     beacon_chain_accounting: BeaconChainAccounting
     
     def __init__(self, beacon_chain_accounting):
         self.beacon_chain_accounting = beacon_chain_accounting
 
-    """
-    This method generates the initial set of validators and delegators.
-    """
+   
     def initialize_required_data(self):
+        """
+        This method generates the initial set of validators and delegators.
+        """
+        
         # generate the validators
         num_validators_to_generate = random.randint(constants.min_validators, constants.max_validators)
         
@@ -46,10 +49,10 @@ class Simulator:
                     )
                 )
     
-    """
-    This method creates a random number of delegations with a random amount of delegated GWEI.
-    """
     def tick_delegation(self):
+        """
+        This method creates a random number of delegations with a random amount of delegated GWEI.
+        """
         num_delegations = random.randint(constants.min_delegations_per_tick, constants.max_delegations_per_tick)
         
         for _ in range(num_delegations):
