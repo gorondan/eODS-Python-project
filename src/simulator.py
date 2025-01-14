@@ -5,13 +5,20 @@ from eods.beacon_chain_accounting import BeaconChainAccounting
 import simulation_constants as constants
 from protocol.validator import Validator
 
-
+"""
+The Simulator operates in discrete 'ticks' over a defined number of iterations. 
+During each tick, it generates new delegations, applies rewards, penalties, and slashings, 
+and processes withdrawals.
+"""
 class Simulator: 
     beacon_chain_accounting: BeaconChainAccounting
     
     def __init__(self, beacon_chain_accounting):
         self.beacon_chain_accounting = beacon_chain_accounting
 
+    """
+    This method generates the initial set of validators and delegators.
+    """
     def initialize_required_data(self):
         # generate the validators
         num_validators_to_generate = random.randint(constants.min_validators, constants.max_validators)
@@ -39,6 +46,9 @@ class Simulator:
                     )
                 )
     
+    """
+    This method creates a random number of delegations with a random amount of delegated GWEI.
+    """
     def tick_delegation(self):
         num_delegations = random.randint(constants.min_delegations_per_tick, constants.max_delegations_per_tick)
         
@@ -53,6 +63,9 @@ class Simulator:
             
             self.beacon_chain_accounting.delegate(delegator_index, validator_key, delegated_amount)
 
+    """
+    This method creates a random number of withdrawals with a random amount of withdrawed GWEI.
+    """
     def tick_withdrawals(self):
         num_withdrawals = random.randint(constants.min_withdrawals_per_tick, constants.max_withdrawals_per_tick)
         
@@ -72,7 +85,10 @@ class Simulator:
                 withdrawed_amount = random.randint(0, math.floor(delegated_validator.delegated_balances[delegator_index]))
 
                 self.beacon_chain_accounting.withdraw(delegator_index, delegated_validator.delegated_validator.pubkey, withdrawed_amount)
-        
+      
+    """
+    This method generated the rewards, penalties and slashings for the validators and delegators.
+    """    
     def process_rewards_penalties(self):
         delegated_validators = self.beacon_chain_accounting.delegated_validators_registry.delegated_validators
 
