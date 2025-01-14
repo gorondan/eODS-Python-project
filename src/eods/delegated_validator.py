@@ -1,4 +1,3 @@
-import sys
 from typing import List
 from eods.custom_types import Gwei, Quota
 from protocol.validator import Validator
@@ -9,16 +8,16 @@ class DelegatedValidator:
     penalties: Gwei
     validator_balance: Gwei
 
-    debug_total_rewards: Gwei
-    debug_total_penalties: Gwei
-    debug_total_delegated: Gwei
-    debug_total_withdrawn: Gwei
-
     delegated_validator: Validator
     validator_quota: Quota
     delegator_quotas: List[Quota]
     delegated_balances: List[Gwei]
     total_delegated_balance: Gwei
+    
+    debug_total_rewards: Gwei
+    debug_total_penalties: Gwei
+    debug_total_delegated: Gwei
+    debug_total_withdrawn: Gwei
 
     def __init__(self, validator: Validator, initial_balance: Gwei):
         self.delegated_validator = validator

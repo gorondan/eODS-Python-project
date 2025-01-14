@@ -18,7 +18,18 @@ class BeaconChainAccounting:
         self.delegators_registry = DelegatorsRegistry()
         self.validators_registry = ValidatorsRegistry()
 
+    # wallet -> delegator balance
+    def deposit_to_delegate_event(self, pubkey: BLSPubkey, amount: Gwei):
+        self.delegators_registry.deposit_to_delegate(pubkey, amount)
+         
     
+    
+    # deposit_to_delegate_contract -> delegator balance : deposit_to_delegator_balance
+    # deposit_to_delegate_contract <- delegator balance : withdraw_from_delegator_balance
+    
+    # delegator balance -> validator : delegate_to_validator
+    # delegator balance <- validator : withdraw_from_validator
+
     def delegate(self, delegator_index: DelegatorIndex, validator_pubkey: BLSPubkey, amount: Gwei):
         """
         This method acts as an entrypoint for delegation. It creates a delegation if needed and 
