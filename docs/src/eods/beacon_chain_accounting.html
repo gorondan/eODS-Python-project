@@ -90,12 +90,12 @@ el.replaceWith(d);
     def delegate_to_validator(self, delegator_index: DelegatorIndex, validator_pubkey: BLSPubkey, amount: Gwei):
         &#34;&#34;&#34;
         This method acts as an entrypoint for delegation. It creates a delegated validator if needed and 
-        it deposits a given amount.
+        funds it with a given amount.
         
         Args:
             delegator_index (DelegatorIndex): The index of the delegator.
             validator_pubkey (BLSPubkey): The public key of the validator.
-            amount (Gwei): The amount delegated.
+            amount (Gwei): The delegated amount.
         &#34;&#34;&#34;
         
         validator = self.validators_registry.get_validator_by_id(validator_pubkey)
