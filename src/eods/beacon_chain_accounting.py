@@ -6,33 +6,39 @@ from eods.custom_types import BLSPubkey, Gwei, DelegatorIndex
 class BeaconChainAccounting:
     """
     This class is responsible for exposing the balance sheet operations - delegations and withdrawals.
+    
+    These are the different contexts of depositing/withdrawing:
+        deposit_to_delegate_contract -> delegator balance : deposit_to_delegator_balance
+        ExecutionAddress <- delegator balance : withdraw_from_delegator_balance
+        delegator balance -> validator : delegate_to_validator
+        delegator balance <- validator : withdraw_from_validator
     """
     
     delegators_registry: DelegatorsRegistry
     validators_registry: ValidatorsRegistry
-
     delegated_validators_registry: DelegatedValidatorsRegistry
 
     def __init__(self):
-        self.delegated_validators_registry = DelegatedValidatorsRegistry()
         self.delegators_registry = DelegatorsRegistry()
         self.validators_registry = ValidatorsRegistry()
+        self.delegated_validators_registry = DelegatedValidatorsRegistry()
 
-    # wallet -> delegator balance
-    def deposit_to_delegate_event(self, pubkey: BLSPubkey, amount: Gwei):
-        self.delegators_registry.deposit_to_delegate(pubkey, amount)
-         
-    
-    
-    # deposit_to_delegate_contract -> delegator balance : deposit_to_delegator_balance
-    # deposit_to_delegate_contract <- delegator balance : withdraw_from_delegator_balance
-    
-    # delegator balance -> validator : delegate_to_validator
-    # delegator balance <- validator : withdraw_from_validator
-
-    def delegate(self, delegator_index: DelegatorIndex, validator_pubkey: BLSPubkey, amount: Gwei):
+    def deposit_to_delegator_balance(self, pubkey: BLSPubkey, amount: Gwei):
         """
-        This method acts as an entrypoint for delegation. It creates a delegation if needed and 
+        This method will deposit an amount to a delegator's balance.
+        If there is no delegator the registry will create one.
+        """
+        self.delegators_registry.deposit(pubkey, amount)
+         
+    def withdraw_from_delegator_balance(self, pubkey: BLSPubkey, amount: Gwei):
+        """
+        This method facilitates withdrawal from a delegator's balance 
+        """
+        self.delegators_registry.withdraw(pubkey, amount)
+
+    def delegate_to_validator(self, delegator_index: DelegatorIndex, validator_pubkey: BLSPubkey, amount: Gwei):
+        """
+        This method acts as an entrypoint for delegation. It creates a delegated validator if needed and 
         it deposits a given amount.
         
         Args:
@@ -48,7 +54,7 @@ class BeaconChainAccounting:
 
         self.delegated_validators_registry.process_delegation(delegator_index, validator.pubkey, amount)
 
-    def withdraw(self, delegator_index: DelegatorIndex, validator_pubkey: BLSPubkey, amount: Gwei):
+    def withdraw_from_validator(self, delegator_index: DelegatorIndex, validator_pubkey: BLSPubkey, amount: Gwei):
         """
         This method acts as an entrypoint for withdrawal. 
         Args:

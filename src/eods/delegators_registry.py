@@ -39,7 +39,7 @@ class DelegatorsRegistry:
         # Add the deposit amount to the delegator's balance
         self.delegators_balances[delegator_index] += amount
 
-    def withdraw_amount(self, pubkey: BLSPubkey, amount: Gwei):
+    def withdraw(self, pubkey: BLSPubkey, amount: Gwei):
         delegator_index = self._get_delegator_index_by_id(pubkey)
 
         if amount <= 0:
