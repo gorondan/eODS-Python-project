@@ -3,6 +3,9 @@ from eods.custom_types import Gwei, BLSPubkey
 from protocol.validator import Validator
 
 class ValidatorsRegistry:
+    """
+    This class defines the registry used to manage validators.
+    """
     validators: List[Validator]  # Stores existing validators' data as a list of Delegator instances.
     validators_balances: List[Gwei]  # List of Gwei existing validators' balances
 

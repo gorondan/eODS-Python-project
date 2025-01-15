@@ -41,7 +41,7 @@ class Simulator:
         # generate the delegators    
         num_delegators_to_generate = random.randint(constants.min_delegators, constants.max_delegators)
         for _ in range(num_delegators_to_generate):
-            self.beacon_chain_accounting.delegators_registry.deposit(
+            self.beacon_chain_accounting.deposit_to_delegator_balance(
                 secrets.token_hex(32), 
                 random.randint(
                     constants.min_delegator_deposit, 
@@ -64,7 +64,7 @@ class Simulator:
             validator = self.beacon_chain_accounting.validators_registry.validators[validator_index]
             validator_key = validator.pubkey
             
-            self.beacon_chain_accounting.delegate(delegator_index, validator_key, delegated_amount)
+            self.beacon_chain_accounting.delegate_to_validator(delegator_index, validator_key, delegated_amount)
 
     """
     This method creates a random number of withdrawals with a random amount of withdrawed GWEI.
@@ -87,7 +87,7 @@ class Simulator:
                 
                 withdrawed_amount = random.randint(0, math.floor(delegated_validator.delegated_balances[delegator_index]))
 
-                self.beacon_chain_accounting.withdraw(delegator_index, delegated_validator.delegated_validator.pubkey, withdrawed_amount)
+                self.beacon_chain_accounting.withdraw_from_validator(delegator_index, delegated_validator.delegated_validator.pubkey, withdrawed_amount)
       
     """
     This method generated the rewards, penalties and slashings for the validators and delegators.

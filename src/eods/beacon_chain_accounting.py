@@ -32,7 +32,7 @@ class BeaconChainAccounting:
          
     def withdraw_from_delegator_balance(self, pubkey: BLSPubkey, amount: Gwei):
         """
-        This method facilitates withdrawal from a delegator's balance 
+        This method facilitates withdrawal from a delegator's balance.
         """
         self.delegators_registry.withdraw(pubkey, amount)
 

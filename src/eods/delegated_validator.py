@@ -3,6 +3,10 @@ from eods.custom_types import Gwei, Quota
 from protocol.validator import Validator
 
 class DelegatedValidator:
+    """
+    This class serves as a wrapper around a Validator, providing an abstraction for managing delegated amounts. 
+    It defines quotas, tracks balances, and facilitates operations related to delegation management.  `
+    """
     initial_balance: Gwei
     rewards: Gwei
     penalties: Gwei
@@ -23,8 +27,7 @@ class DelegatedValidator:
         self.delegated_validator = validator
         self.initial_balance = initial_balance
         self.validator_balance = self.initial_balance
-        #validator.effective_balance = self.validator_balance
-        
+                
         self.validator_quota = 1
         self.delegator_quotas = [0]
         self.delegated_balances = [0]
@@ -80,6 +83,9 @@ class DelegatedValidator:
         self.debug_total_delegated += amount
 
     def process_rewards_penalties(self):
+        """
+        This method processes the rewards and penalties.
+        """
         self._adjust_delegated_balances()
 
         self.debug_total_rewards += self.rewards
@@ -103,17 +109,10 @@ class DelegatedValidator:
         
         return withdrawable_amount
 
-    def _decrease_balance(self, delta: Gwei):
-        """
-        Method to decrease the delegated validator's balance with `delta`, with underflow protection
-        """
-        
+    def _decrease_balance(self, delta: Gwei): 
         self.validator_balance -= delta
 
     def _increase_balance(self, delta: Gwei):
-        """
-        Method to increase the delegated validator's balance with `delta` 
-        """
         self.validator_balance += delta 
 
     def _recalculate_quotas(self):

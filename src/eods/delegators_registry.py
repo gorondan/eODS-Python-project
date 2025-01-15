@@ -1,11 +1,11 @@
-"""
-This module defines the methods that modify the state of the delegators registry
-"""
 from typing import List
 from eods.custom_types import Gwei, BLSPubkey
 from eods.delegator import Delegator
 
 class DelegatorsRegistry:
+    """
+    This class defines the registry used to manage delegators.
+    """
     delegators: List[Delegator]  # Stores delegators' data as a list of Delegator instances.
     delegators_balances: List[Gwei]  # List of Gwei delegators' balances
 
@@ -15,6 +15,9 @@ class DelegatorsRegistry:
         self.delegators_balances = [] # Max size: DELEGATOR_REGISTRY_LIMIT
 
     def delegate_amount(self, pubkey: BLSPubkey, amount: Gwei):
+        """
+        This method removes an amount from a delegator's balance.
+        """
         delegator_index = self._get_delegator_index_by_id(pubkey)
 
         if amount <= 0:
@@ -28,6 +31,11 @@ class DelegatorsRegistry:
         self.delegators_balances[delegator_index] -= amount
 
     def deposit(self, pubkey: BLSPubkey, amount: Gwei):
+        """
+        This method adds an amount from a delegator's balance.
+        If there is no delegator for the specified pubkey it will be created.
+        """
+        
         # If delegator does not exist, register the new delegator
         delegator_index = self._get_delegator_index_by_id(pubkey)
         if delegator_index == -1:
@@ -40,6 +48,9 @@ class DelegatorsRegistry:
         self.delegators_balances[delegator_index] += amount
 
     def withdraw(self, pubkey: BLSPubkey, amount: Gwei):
+        """
+        This method adds an amount from a delegator's balance.
+        """
         delegator_index = self._get_delegator_index_by_id(pubkey)
 
         if amount <= 0:
