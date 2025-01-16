@@ -1,3 +1,6 @@
+"""
+This module modifies the state of the beacon chain accounting protocol gadget.
+"""
 from protocol.validators_registry import ValidatorsRegistry
 from eods.delegated_validators_registry import DelegatedValidatorsRegistry
 from eods.delegators_registry import DelegatorsRegistry

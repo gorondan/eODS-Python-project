@@ -1,3 +1,6 @@
+"""
+This module defines the attributes of class delegated validator.
+"""
 from typing import List
 from eods.custom_types import Gwei, Quota
 from protocol.validator import Validator

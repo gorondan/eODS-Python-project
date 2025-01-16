@@ -1,5 +1,5 @@
 """
-This module defines the attributes of class Delegator
+This module defines the attributes of class delegator.
 """
 from eods.custom_types import Gwei, BLSPubkey, Epoch
 

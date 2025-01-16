@@ -1,3 +1,6 @@
+"""
+This module defines the custom types used by the program.
+"""
 from typing import ByteString
 import numpy as np
 

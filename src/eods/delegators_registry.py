@@ -1,6 +1,10 @@
+"""
+This module modifies the state of the delegators registry.
+"""
 from typing import List
 from eods.custom_types import Gwei, BLSPubkey
 from eods.delegator import Delegator
+
 
 class DelegatorsRegistry:
     """
