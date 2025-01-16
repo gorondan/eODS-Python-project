@@ -1,3 +1,6 @@
+"""
+This module modifies the state of the beacon chain accounting protocol gadget.
+"""
 from protocol.validators_registry import ValidatorsRegistry
 from eods.delegated_validators_registry import DelegatedValidatorsRegistry
 from eods.delegators_registry import DelegatorsRegistry
@@ -39,7 +42,7 @@ class BeaconChainAccounting:
     def delegate_to_validator(self, delegator_index: DelegatorIndex, validator_pubkey: BLSPubkey, amount: Gwei):
         """
         This method acts as an entrypoint for delegation. It creates a delegated validator if needed and 
-        it deposits a given amount.
+        it funds it with a given amount.
         
         Args:
             delegator_index (DelegatorIndex): The index of the delegator.

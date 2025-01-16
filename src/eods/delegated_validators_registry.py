@@ -1,5 +1,5 @@
 """
-This module defines the methods that modify the state of the delegated validators registry
+This module modifies the state of the delegated validators registry.
 """
 from typing import List
 from protocol.validator import Validator
