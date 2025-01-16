@@ -1,3 +1,6 @@
+"""
+This module defines the constants used by the project's simulator, to generate data.
+"""
 min_validators = 128
 max_validators = 1024
  

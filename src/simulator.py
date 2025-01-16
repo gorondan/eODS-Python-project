@@ -22,7 +22,6 @@ class Simulator:
         """
         This method generates the initial set of validators and delegators.
         """
-        
         # generate the validators
         num_validators_to_generate = random.randint(constants.min_validators, constants.max_validators)
         
@@ -66,10 +65,10 @@ class Simulator:
             
             self.beacon_chain_accounting.delegate_to_validator(delegator_index, validator_key, delegated_amount)
 
-    """
-    This method creates a random number of withdrawals with a random amount of withdrawed GWEI.
-    """
     def tick_withdrawals(self):
+        """
+        This method creates a random number of withdrawals with a random amount of withdrawed GWEI.
+        """
         num_withdrawals = random.randint(constants.min_withdrawals_per_tick, constants.max_withdrawals_per_tick)
         
         for _ in range(num_withdrawals):
@@ -89,10 +88,10 @@ class Simulator:
 
                 self.beacon_chain_accounting.withdraw_from_validator(delegator_index, delegated_validator.delegated_validator.pubkey, withdrawed_amount)
       
-    """
-    This method generated the rewards, penalties and slashings for the validators and delegators.
-    """    
     def process_rewards_penalties(self):
+        """
+        This method generates the rewards, penalties and slashings to be applied to the validator balances.
+        """    
         delegated_validators = self.beacon_chain_accounting.delegated_validators_registry.delegated_validators
 
         for delegated_validator in delegated_validators:
