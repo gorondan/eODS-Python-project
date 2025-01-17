@@ -8,7 +8,7 @@ from eods.custom_types import BLSPubkey, Gwei, DelegatorIndex
 
 class BeaconChainAccounting:
     """
-    This class is responsible for exposing the balance sheet operations - delegations and withdrawals.
+    This class is responsible for exposing the balance sheet operations - deposit to delegator balance, delegations toward and withdrawals.
     
     These are the different contexts of depositing/withdrawing:
         deposit_to_delegate_contract -> delegator balance : deposit_to_delegator_balance
@@ -74,4 +74,6 @@ class BeaconChainAccounting:
         if not self.delegated_validators_registry.is_validator_delegated(validator.pubkey):
             raise ValueError("Validator with the provided pubkey is not delegated validator")
 
-        self.delegated_validators_registry.process_withdrawal(delegator_index, validator.pubkey, amount)
+        withdrawal_amount = self.delegated_validators_registry.process_withdrawal(delegator_index, validator.pubkey, amount)
+
+        self.delegators_registry.withdraw(delegator_index, withdrawal_amount)

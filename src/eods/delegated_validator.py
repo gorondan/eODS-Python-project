@@ -45,7 +45,7 @@ class DelegatedValidator:
         self.debug_total_penalties = 0
         
 
-    def process_withdrawal(self, delegator_index: int, amount: Gwei):
+    def process_withdrawal(self, delegator_index: int, amount: Gwei) -> Gwei:
         """
         Method to process a withdrawal of balance from the delegated validator towards a delegator with `delegator_index`
         """
@@ -65,6 +65,8 @@ class DelegatedValidator:
         self._recalculate_quotas()
 
         self.debug_total_withdrawn += withdrawable_amount
+        
+        return withdrawable_amount
 
     def process_delegation(self, delegator_index: int, amount: Gwei):
         """

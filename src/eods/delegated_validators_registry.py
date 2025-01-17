@@ -46,12 +46,14 @@ class DelegatedValidatorsRegistry:
         delegated_validator = self._get_delegated_validator_by_id(pubkey)
         delegated_validator.process_delegation(delegator_index, amount)
 
-    def process_withdrawal(self, delegator_index: DelegatorIndex, pubkey: BLSPubkey, amount: Gwei):
+    def process_withdrawal(self, delegator_index: DelegatorIndex, pubkey: BLSPubkey, amount: Gwei) -> Gwei:
         """
         This method uses the delegated validator to process a withdrawal.
         """
         delegated_validator = self._get_delegated_validator_by_id(pubkey)
-        delegated_validator.process_withdrawal(delegator_index, amount)
+        
+        return delegated_validator.process_withdrawal(delegator_index, amount)
+
 
     def process_rewards_penalties(self):
         """

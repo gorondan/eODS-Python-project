@@ -2,7 +2,7 @@
 This module modifies the state of the delegators registry.
 """
 from typing import List
-from eods.custom_types import Gwei, BLSPubkey
+from eods.custom_types import Gwei, BLSPubkey, DelegatorIndex
 from eods.delegator import Delegator
 
 
@@ -51,11 +51,10 @@ class DelegatorsRegistry:
         # Add the deposit amount to the delegator's balance
         self.delegators_balances[delegator_index] += amount
 
-    def withdraw(self, pubkey: BLSPubkey, amount: Gwei):
+    def withdraw(self, delegator_index: DelegatorIndex, amount: Gwei):
         """
         This method adds an amount to a delegator's balance.
         """
-        delegator_index = self._get_delegator_index_by_id(pubkey)
 
         if amount <= 0:
             raise ValueError("Withdrawed amount must be positive.")
