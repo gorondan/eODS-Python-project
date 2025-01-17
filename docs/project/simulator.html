@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1">
 <meta name="generator" content="pdoc3 0.11.5">
-<title>src.simulator API documentation</title>
+<title>project.simulator API documentation</title>
 <meta name="description" content="This module simulates an ecosystem in which we can test delegations.
 It generates new delegations, applies rewards, penalties, and slashings,
 and …">
@@ -35,7 +35,7 @@ el.replaceWith(d);
 <main>
 <article id="content">
 <header>
-<h1 class="title">Module <code>src.simulator</code></h1>
+<h1 class="title">Module <code>project.simulator</code></h1>
 </header>
 <section id="section-intro">
 <p>This module simulates an ecosystem in which we can test delegations.
@@ -51,7 +51,7 @@ and processes withdrawals.</p>
 <section>
 <h2 class="section-title" id="header-classes">Classes</h2>
 <dl>
-<dt id="src.simulator.Simulator"><code class="flex name class">
+<dt id="project.simulator.Simulator"><code class="flex name class">
 <span>class <span class="ident">Simulator</span></span>
 <span>(</span><span>beacon_chain_accounting)</span>
 </code></dt>
@@ -169,14 +169,14 @@ During each tick, it generates new delegations, applies rewards, penalties, and 
 and processes withdrawals.</p></div>
 <h3>Class variables</h3>
 <dl>
-<dt id="src.simulator.Simulator.beacon_chain_accounting"><code class="name">var <span class="ident">beacon_chain_accounting</span> : eods.beacon_chain_accounting.BeaconChainAccounting</code></dt>
+<dt id="project.simulator.Simulator.beacon_chain_accounting"><code class="name">var <span class="ident">beacon_chain_accounting</span> : eods.beacon_chain_accounting.BeaconChainAccounting</code></dt>
 <dd>
 <div class="desc"></div>
 </dd>
 </dl>
 <h3>Methods</h3>
 <dl>
-<dt id="src.simulator.Simulator.initialize_required_data"><code class="name flex">
+<dt id="project.simulator.Simulator.initialize_required_data"><code class="name flex">
 <span>def <span class="ident">initialize_required_data</span></span>(<span>self)</span>
 </code></dt>
 <dd>
@@ -216,7 +216,7 @@ and processes withdrawals.</p></div>
 </details>
 <div class="desc"><p>This method generates the initial set of validators and delegators.</p></div>
 </dd>
-<dt id="src.simulator.Simulator.process_rewards_penalties"><code class="name flex">
+<dt id="project.simulator.Simulator.process_rewards_penalties"><code class="name flex">
 <span>def <span class="ident">process_rewards_penalties</span></span>(<span>self)</span>
 </code></dt>
 <dd>
@@ -248,7 +248,7 @@ and processes withdrawals.</p></div>
 </details>
 <div class="desc"><p>This method generates the rewards, penalties and slashings to be applied to the validator balances.</p></div>
 </dd>
-<dt id="src.simulator.Simulator.tick_delegation"><code class="name flex">
+<dt id="project.simulator.Simulator.tick_delegation"><code class="name flex">
 <span>def <span class="ident">tick_delegation</span></span>(<span>self)</span>
 </code></dt>
 <dd>
@@ -275,7 +275,7 @@ and processes withdrawals.</p></div>
 </details>
 <div class="desc"><p>This method creates a random number of delegations with a random amount of delegated GWEI.</p></div>
 </dd>
-<dt id="src.simulator.Simulator.tick_withdrawals"><code class="name flex">
+<dt id="project.simulator.Simulator.tick_withdrawals"><code class="name flex">
 <span>def <span class="ident">tick_withdrawals</span></span>(<span>self)</span>
 </code></dt>
 <dd>
@@ -320,19 +320,19 @@ and processes withdrawals.</p></div>
 <ul id="index">
 <li><h3>Super-module</h3>
 <ul>
-<li><code><a title="src" href="index.html">src</a></code></li>
+<li><code><a title="project" href="index.html">project</a></code></li>
 </ul>
 </li>
 <li><h3><a href="#header-classes">Classes</a></h3>
 <ul>
 <li>
-<h4><code><a title="src.simulator.Simulator" href="#src.simulator.Simulator">Simulator</a></code></h4>
+<h4><code><a title="project.simulator.Simulator" href="#project.simulator.Simulator">Simulator</a></code></h4>
 <ul class="">
-<li><code><a title="src.simulator.Simulator.beacon_chain_accounting" href="#src.simulator.Simulator.beacon_chain_accounting">beacon_chain_accounting</a></code></li>
-<li><code><a title="src.simulator.Simulator.initialize_required_data" href="#src.simulator.Simulator.initialize_required_data">initialize_required_data</a></code></li>
-<li><code><a title="src.simulator.Simulator.process_rewards_penalties" href="#src.simulator.Simulator.process_rewards_penalties">process_rewards_penalties</a></code></li>
-<li><code><a title="src.simulator.Simulator.tick_delegation" href="#src.simulator.Simulator.tick_delegation">tick_delegation</a></code></li>
-<li><code><a title="src.simulator.Simulator.tick_withdrawals" href="#src.simulator.Simulator.tick_withdrawals">tick_withdrawals</a></code></li>
+<li><code><a title="project.simulator.Simulator.beacon_chain_accounting" href="#project.simulator.Simulator.beacon_chain_accounting">beacon_chain_accounting</a></code></li>
+<li><code><a title="project.simulator.Simulator.initialize_required_data" href="#project.simulator.Simulator.initialize_required_data">initialize_required_data</a></code></li>
+<li><code><a title="project.simulator.Simulator.process_rewards_penalties" href="#project.simulator.Simulator.process_rewards_penalties">process_rewards_penalties</a></code></li>
+<li><code><a title="project.simulator.Simulator.tick_delegation" href="#project.simulator.Simulator.tick_delegation">tick_delegation</a></code></li>
+<li><code><a title="project.simulator.Simulator.tick_withdrawals" href="#project.simulator.Simulator.tick_withdrawals">tick_withdrawals</a></code></li>
 </ul>
 </li>
 </ul>

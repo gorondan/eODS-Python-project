@@ -4,8 +4,8 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1">
 <meta name="generator" content="pdoc3 0.11.5">
-<title>src.protocol.validator API documentation</title>
-<meta name="description" content="This module contains the mocked Validator already present in the protocol.">
+<title>project.simulation_constants API documentation</title>
+<meta name="description" content="This module defines the constants used by the project&#39;s simulator, to generate data.">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/13.0.0/sanitize.min.css" integrity="sha512-y1dtMcuvtTMJc1yPgEqF0ZjQbhnc/bFhyvIyVNb9Zk5mIGtqVaAB1Ttl28su8AvFMOY0EwRbAe+HCLqj6W7/KA==" crossorigin>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/13.0.0/typography.min.css" integrity="sha512-Y1DYSb995BAfxobCkKepB1BqJJTPrOp3zPL74AWFugHHmmdcvO+C48WLrUOlhGMc0QG7AE3f7gmvvcrmX2fDoA==" crossorigin>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/default.min.css" crossorigin>
@@ -33,10 +33,10 @@ el.replaceWith(d);
 <main>
 <article id="content">
 <header>
-<h1 class="title">Module <code>src.protocol.validator</code></h1>
+<h1 class="title">Module <code>project.simulation_constants</code></h1>
 </header>
 <section id="section-intro">
-<p>This module contains the mocked Validator already present in the protocol.</p>
+<p>This module defines the constants used by the project's simulator, to generate data.</p>
 </section>
 <section>
 </section>
@@ -45,36 +45,6 @@ el.replaceWith(d);
 <section>
 </section>
 <section>
-<h2 class="section-title" id="header-classes">Classes</h2>
-<dl>
-<dt id="src.protocol.validator.Validator"><code class="flex name class">
-<span>class <span class="ident">Validator</span></span>
-</code></dt>
-<dd>
-<details class="source">
-<summary>
-<span>Expand source code</span>
-</summary>
-<pre><code class="python">class Validator:
-    &#34;&#34;&#34;
-    This class represents the mocked Validator already present in the protocol.
-    &#34;&#34;&#34;
-    def __init__(self):
-        self.pubkey = BLSPubkey # Unique identifier for each validator
-        self.withdrawal_credentials: bytes = b&#39;\x00&#39; * 32  # Commitment to pubkey for withdrawals
-        self.effective_balance = Gwei  # Balance at stake
-        self.slashed: bool
-        # Status epochs
-        self.activation_eligibility_epoch = Epoch  # When criteria for activation were met
-        self.activation_epoch = Epoch
-        self.exit_epoch = Epoch
-        self.withdrawable_epoch = Epoch  # When validator can withdraw funds
-        self.delegated: bool # new in eODS
-        self.fee_percentage: Fee # new in eODS</code></pre>
-</details>
-<div class="desc"><p>This class represents the mocked Validator already present in the protocol.</p></div>
-</dd>
-</dl>
 </section>
 </article>
 <nav id="sidebar">
@@ -84,14 +54,7 @@ el.replaceWith(d);
 <ul id="index">
 <li><h3>Super-module</h3>
 <ul>
-<li><code><a title="src.protocol" href="index.html">src.protocol</a></code></li>
-</ul>
-</li>
-<li><h3><a href="#header-classes">Classes</a></h3>
-<ul>
-<li>
-<h4><code><a title="src.protocol.validator.Validator" href="#src.protocol.validator.Validator">Validator</a></code></h4>
-</li>
+<li><code><a title="project" href="index.html">project</a></code></li>
 </ul>
 </li>
 </ul>

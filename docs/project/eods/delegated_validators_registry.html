@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1">
 <meta name="generator" content="pdoc3 0.11.5">
-<title>src.eods.delegated_validators_registry API documentation</title>
+<title>project.eods.delegated_validators_registry API documentation</title>
 <meta name="description" content="This module modifies the state of the delegated validators registry.">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/13.0.0/sanitize.min.css" integrity="sha512-y1dtMcuvtTMJc1yPgEqF0ZjQbhnc/bFhyvIyVNb9Zk5mIGtqVaAB1Ttl28su8AvFMOY0EwRbAe+HCLqj6W7/KA==" crossorigin>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/13.0.0/typography.min.css" integrity="sha512-Y1DYSb995BAfxobCkKepB1BqJJTPrOp3zPL74AWFugHHmmdcvO+C48WLrUOlhGMc0QG7AE3f7gmvvcrmX2fDoA==" crossorigin>
@@ -33,7 +33,7 @@ el.replaceWith(d);
 <main>
 <article id="content">
 <header>
-<h1 class="title">Module <code>src.eods.delegated_validators_registry</code></h1>
+<h1 class="title">Module <code>project.eods.delegated_validators_registry</code></h1>
 </header>
 <section id="section-intro">
 <p>This module modifies the state of the delegated validators registry.</p>
@@ -47,7 +47,7 @@ el.replaceWith(d);
 <section>
 <h2 class="section-title" id="header-classes">Classes</h2>
 <dl>
-<dt id="src.eods.delegated_validators_registry.DelegatedValidatorsRegistry"><code class="flex name class">
+<dt id="project.eods.delegated_validators_registry.DelegatedValidatorsRegistry"><code class="flex name class">
 <span>class <span class="ident">DelegatedValidatorsRegistry</span></span>
 </code></dt>
 <dd>
@@ -95,12 +95,14 @@ el.replaceWith(d);
         delegated_validator = self._get_delegated_validator_by_id(pubkey)
         delegated_validator.process_delegation(delegator_index, amount)
 
-    def process_withdrawal(self, delegator_index: DelegatorIndex, pubkey: BLSPubkey, amount: Gwei):
+    def process_withdrawal(self, delegator_index: DelegatorIndex, pubkey: BLSPubkey, amount: Gwei) -&gt; Gwei:
         &#34;&#34;&#34;
         This method uses the delegated validator to process a withdrawal.
         &#34;&#34;&#34;
         delegated_validator = self._get_delegated_validator_by_id(pubkey)
-        delegated_validator.process_withdrawal(delegator_index, amount)
+        
+        return delegated_validator.process_withdrawal(delegator_index, amount)
+
 
     def process_rewards_penalties(self):
         &#34;&#34;&#34;
@@ -120,14 +122,14 @@ el.replaceWith(d);
 <div class="desc"><p>This class defines the registry used to manage the delegated validators.</p></div>
 <h3>Class variables</h3>
 <dl>
-<dt id="src.eods.delegated_validators_registry.DelegatedValidatorsRegistry.delegated_validators"><code class="name">var <span class="ident">delegated_validators</span> : List[eods.delegated_validator.DelegatedValidator]</code></dt>
+<dt id="project.eods.delegated_validators_registry.DelegatedValidatorsRegistry.delegated_validators"><code class="name">var <span class="ident">delegated_validators</span> : List[eods.delegated_validator.DelegatedValidator]</code></dt>
 <dd>
 <div class="desc"></div>
 </dd>
 </dl>
 <h3>Methods</h3>
 <dl>
-<dt id="src.eods.delegated_validators_registry.DelegatedValidatorsRegistry.create_delegated_validator"><code class="name flex">
+<dt id="project.eods.delegated_validators_registry.DelegatedValidatorsRegistry.create_delegated_validator"><code class="name flex">
 <span>def <span class="ident">create_delegated_validator</span></span>(<span>self, validator: protocol.validator.Validator, initial_balance: numpy.uint64)</span>
 </code></dt>
 <dd>
@@ -156,7 +158,7 @@ el.replaceWith(d);
 <dd>The initial balance of the new delegated validator.</dd>
 </dl></div>
 </dd>
-<dt id="src.eods.delegated_validators_registry.DelegatedValidatorsRegistry.is_validator_delegated"><code class="name flex">
+<dt id="project.eods.delegated_validators_registry.DelegatedValidatorsRegistry.is_validator_delegated"><code class="name flex">
 <span>def <span class="ident">is_validator_delegated</span></span>(<span>self, pubkey: ByteString)</span>
 </code></dt>
 <dd>
@@ -178,7 +180,7 @@ el.replaceWith(d);
 </details>
 <div class="desc"><p>This method checks if a delegated validator with a specific pubkey exists.</p></div>
 </dd>
-<dt id="src.eods.delegated_validators_registry.DelegatedValidatorsRegistry.process_delegation"><code class="name flex">
+<dt id="project.eods.delegated_validators_registry.DelegatedValidatorsRegistry.process_delegation"><code class="name flex">
 <span>def <span class="ident">process_delegation</span></span>(<span>self, delegator_index: numpy.uint64, pubkey: ByteString, amount: numpy.uint64)</span>
 </code></dt>
 <dd>
@@ -195,7 +197,7 @@ el.replaceWith(d);
 </details>
 <div class="desc"><p>This method uses the delegated validator to process a delegation.</p></div>
 </dd>
-<dt id="src.eods.delegated_validators_registry.DelegatedValidatorsRegistry.process_rewards_penalties"><code class="name flex">
+<dt id="project.eods.delegated_validators_registry.DelegatedValidatorsRegistry.process_rewards_penalties"><code class="name flex">
 <span>def <span class="ident">process_rewards_penalties</span></span>(<span>self)</span>
 </code></dt>
 <dd>
@@ -212,20 +214,21 @@ el.replaceWith(d);
 </details>
 <div class="desc"><p>This method uses the delegated validator to process the rewards and penalties.</p></div>
 </dd>
-<dt id="src.eods.delegated_validators_registry.DelegatedValidatorsRegistry.process_withdrawal"><code class="name flex">
-<span>def <span class="ident">process_withdrawal</span></span>(<span>self, delegator_index: numpy.uint64, pubkey: ByteString, amount: numpy.uint64)</span>
+<dt id="project.eods.delegated_validators_registry.DelegatedValidatorsRegistry.process_withdrawal"><code class="name flex">
+<span>def <span class="ident">process_withdrawal</span></span>(<span>self, delegator_index: numpy.uint64, pubkey: ByteString, amount: numpy.uint64) ‑> numpy.uint64</span>
 </code></dt>
 <dd>
 <details class="source">
 <summary>
 <span>Expand source code</span>
 </summary>
-<pre><code class="python">def process_withdrawal(self, delegator_index: DelegatorIndex, pubkey: BLSPubkey, amount: Gwei):
+<pre><code class="python">def process_withdrawal(self, delegator_index: DelegatorIndex, pubkey: BLSPubkey, amount: Gwei) -&gt; Gwei:
     &#34;&#34;&#34;
     This method uses the delegated validator to process a withdrawal.
     &#34;&#34;&#34;
     delegated_validator = self._get_delegated_validator_by_id(pubkey)
-    delegated_validator.process_withdrawal(delegator_index, amount)</code></pre>
+    
+    return delegated_validator.process_withdrawal(delegator_index, amount)</code></pre>
 </details>
 <div class="desc"><p>This method uses the delegated validator to process a withdrawal.</p></div>
 </dd>
@@ -241,20 +244,20 @@ el.replaceWith(d);
 <ul id="index">
 <li><h3>Super-module</h3>
 <ul>
-<li><code><a title="src.eods" href="index.html">src.eods</a></code></li>
+<li><code><a title="project.eods" href="index.html">project.eods</a></code></li>
 </ul>
 </li>
 <li><h3><a href="#header-classes">Classes</a></h3>
 <ul>
 <li>
-<h4><code><a title="src.eods.delegated_validators_registry.DelegatedValidatorsRegistry" href="#src.eods.delegated_validators_registry.DelegatedValidatorsRegistry">DelegatedValidatorsRegistry</a></code></h4>
+<h4><code><a title="project.eods.delegated_validators_registry.DelegatedValidatorsRegistry" href="#project.eods.delegated_validators_registry.DelegatedValidatorsRegistry">DelegatedValidatorsRegistry</a></code></h4>
 <ul class="">
-<li><code><a title="src.eods.delegated_validators_registry.DelegatedValidatorsRegistry.create_delegated_validator" href="#src.eods.delegated_validators_registry.DelegatedValidatorsRegistry.create_delegated_validator">create_delegated_validator</a></code></li>
-<li><code><a title="src.eods.delegated_validators_registry.DelegatedValidatorsRegistry.delegated_validators" href="#src.eods.delegated_validators_registry.DelegatedValidatorsRegistry.delegated_validators">delegated_validators</a></code></li>
-<li><code><a title="src.eods.delegated_validators_registry.DelegatedValidatorsRegistry.is_validator_delegated" href="#src.eods.delegated_validators_registry.DelegatedValidatorsRegistry.is_validator_delegated">is_validator_delegated</a></code></li>
-<li><code><a title="src.eods.delegated_validators_registry.DelegatedValidatorsRegistry.process_delegation" href="#src.eods.delegated_validators_registry.DelegatedValidatorsRegistry.process_delegation">process_delegation</a></code></li>
-<li><code><a title="src.eods.delegated_validators_registry.DelegatedValidatorsRegistry.process_rewards_penalties" href="#src.eods.delegated_validators_registry.DelegatedValidatorsRegistry.process_rewards_penalties">process_rewards_penalties</a></code></li>
-<li><code><a title="src.eods.delegated_validators_registry.DelegatedValidatorsRegistry.process_withdrawal" href="#src.eods.delegated_validators_registry.DelegatedValidatorsRegistry.process_withdrawal">process_withdrawal</a></code></li>
+<li><code><a title="project.eods.delegated_validators_registry.DelegatedValidatorsRegistry.create_delegated_validator" href="#project.eods.delegated_validators_registry.DelegatedValidatorsRegistry.create_delegated_validator">create_delegated_validator</a></code></li>
+<li><code><a title="project.eods.delegated_validators_registry.DelegatedValidatorsRegistry.delegated_validators" href="#project.eods.delegated_validators_registry.DelegatedValidatorsRegistry.delegated_validators">delegated_validators</a></code></li>
+<li><code><a title="project.eods.delegated_validators_registry.DelegatedValidatorsRegistry.is_validator_delegated" href="#project.eods.delegated_validators_registry.DelegatedValidatorsRegistry.is_validator_delegated">is_validator_delegated</a></code></li>
+<li><code><a title="project.eods.delegated_validators_registry.DelegatedValidatorsRegistry.process_delegation" href="#project.eods.delegated_validators_registry.DelegatedValidatorsRegistry.process_delegation">process_delegation</a></code></li>
+<li><code><a title="project.eods.delegated_validators_registry.DelegatedValidatorsRegistry.process_rewards_penalties" href="#project.eods.delegated_validators_registry.DelegatedValidatorsRegistry.process_rewards_penalties">process_rewards_penalties</a></code></li>
+<li><code><a title="project.eods.delegated_validators_registry.DelegatedValidatorsRegistry.process_withdrawal" href="#project.eods.delegated_validators_registry.DelegatedValidatorsRegistry.process_withdrawal">process_withdrawal</a></code></li>
 </ul>
 </li>
 </ul>

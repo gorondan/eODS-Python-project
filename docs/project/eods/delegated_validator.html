@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1">
 <meta name="generator" content="pdoc3 0.11.5">
-<title>src.eods.delegated_validator API documentation</title>
+<title>project.eods.delegated_validator API documentation</title>
 <meta name="description" content="This module defines the attributes of class delegated validator.">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/13.0.0/sanitize.min.css" integrity="sha512-y1dtMcuvtTMJc1yPgEqF0ZjQbhnc/bFhyvIyVNb9Zk5mIGtqVaAB1Ttl28su8AvFMOY0EwRbAe+HCLqj6W7/KA==" crossorigin>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/13.0.0/typography.min.css" integrity="sha512-Y1DYSb995BAfxobCkKepB1BqJJTPrOp3zPL74AWFugHHmmdcvO+C48WLrUOlhGMc0QG7AE3f7gmvvcrmX2fDoA==" crossorigin>
@@ -33,7 +33,7 @@ el.replaceWith(d);
 <main>
 <article id="content">
 <header>
-<h1 class="title">Module <code>src.eods.delegated_validator</code></h1>
+<h1 class="title">Module <code>project.eods.delegated_validator</code></h1>
 </header>
 <section id="section-intro">
 <p>This module defines the attributes of class delegated validator.</p>
@@ -47,7 +47,7 @@ el.replaceWith(d);
 <section>
 <h2 class="section-title" id="header-classes">Classes</h2>
 <dl>
-<dt id="src.eods.delegated_validator.DelegatedValidator"><code class="flex name class">
+<dt id="project.eods.delegated_validator.DelegatedValidator"><code class="flex name class">
 <span>class <span class="ident">DelegatedValidator</span></span>
 <span>(</span><span>validator: protocol.validator.Validator, initial_balance: numpy.uint64)</span>
 </code></dt>
@@ -96,7 +96,7 @@ el.replaceWith(d);
         self.debug_total_penalties = 0
         
 
-    def process_withdrawal(self, delegator_index: int, amount: Gwei):
+    def process_withdrawal(self, delegator_index: int, amount: Gwei) -&gt; Gwei:
         &#34;&#34;&#34;
         Method to process a withdrawal of balance from the delegated validator towards a delegator with `delegator_index`
         &#34;&#34;&#34;
@@ -116,6 +116,8 @@ el.replaceWith(d);
         self._recalculate_quotas()
 
         self.debug_total_withdrawn += withdrawable_amount
+        
+        return withdrawable_amount
 
     def process_delegation(self, delegator_index: int, amount: Gwei):
         &#34;&#34;&#34;
@@ -191,62 +193,62 @@ It defines quotas, tracks balances, and facilitates operations related to delega
 `</p></div>
 <h3>Class variables</h3>
 <dl>
-<dt id="src.eods.delegated_validator.DelegatedValidator.debug_total_delegated"><code class="name">var <span class="ident">debug_total_delegated</span> : numpy.uint64</code></dt>
+<dt id="project.eods.delegated_validator.DelegatedValidator.debug_total_delegated"><code class="name">var <span class="ident">debug_total_delegated</span> : numpy.uint64</code></dt>
 <dd>
 <div class="desc"></div>
 </dd>
-<dt id="src.eods.delegated_validator.DelegatedValidator.debug_total_penalties"><code class="name">var <span class="ident">debug_total_penalties</span> : numpy.uint64</code></dt>
+<dt id="project.eods.delegated_validator.DelegatedValidator.debug_total_penalties"><code class="name">var <span class="ident">debug_total_penalties</span> : numpy.uint64</code></dt>
 <dd>
 <div class="desc"></div>
 </dd>
-<dt id="src.eods.delegated_validator.DelegatedValidator.debug_total_rewards"><code class="name">var <span class="ident">debug_total_rewards</span> : numpy.uint64</code></dt>
+<dt id="project.eods.delegated_validator.DelegatedValidator.debug_total_rewards"><code class="name">var <span class="ident">debug_total_rewards</span> : numpy.uint64</code></dt>
 <dd>
 <div class="desc"></div>
 </dd>
-<dt id="src.eods.delegated_validator.DelegatedValidator.debug_total_withdrawn"><code class="name">var <span class="ident">debug_total_withdrawn</span> : numpy.uint64</code></dt>
+<dt id="project.eods.delegated_validator.DelegatedValidator.debug_total_withdrawn"><code class="name">var <span class="ident">debug_total_withdrawn</span> : numpy.uint64</code></dt>
 <dd>
 <div class="desc"></div>
 </dd>
-<dt id="src.eods.delegated_validator.DelegatedValidator.delegated_balances"><code class="name">var <span class="ident">delegated_balances</span> : List[numpy.uint64]</code></dt>
+<dt id="project.eods.delegated_validator.DelegatedValidator.delegated_balances"><code class="name">var <span class="ident">delegated_balances</span> : List[numpy.uint64]</code></dt>
 <dd>
 <div class="desc"></div>
 </dd>
-<dt id="src.eods.delegated_validator.DelegatedValidator.delegated_validator"><code class="name">var <span class="ident">delegated_validator</span> : protocol.validator.Validator</code></dt>
+<dt id="project.eods.delegated_validator.DelegatedValidator.delegated_validator"><code class="name">var <span class="ident">delegated_validator</span> : protocol.validator.Validator</code></dt>
 <dd>
 <div class="desc"></div>
 </dd>
-<dt id="src.eods.delegated_validator.DelegatedValidator.delegator_quotas"><code class="name">var <span class="ident">delegator_quotas</span> : List[numpy.uint64]</code></dt>
+<dt id="project.eods.delegated_validator.DelegatedValidator.delegator_quotas"><code class="name">var <span class="ident">delegator_quotas</span> : List[numpy.uint64]</code></dt>
 <dd>
 <div class="desc"></div>
 </dd>
-<dt id="src.eods.delegated_validator.DelegatedValidator.initial_balance"><code class="name">var <span class="ident">initial_balance</span> : numpy.uint64</code></dt>
+<dt id="project.eods.delegated_validator.DelegatedValidator.initial_balance"><code class="name">var <span class="ident">initial_balance</span> : numpy.uint64</code></dt>
 <dd>
 <div class="desc"></div>
 </dd>
-<dt id="src.eods.delegated_validator.DelegatedValidator.penalties"><code class="name">var <span class="ident">penalties</span> : numpy.uint64</code></dt>
+<dt id="project.eods.delegated_validator.DelegatedValidator.penalties"><code class="name">var <span class="ident">penalties</span> : numpy.uint64</code></dt>
 <dd>
 <div class="desc"></div>
 </dd>
-<dt id="src.eods.delegated_validator.DelegatedValidator.rewards"><code class="name">var <span class="ident">rewards</span> : numpy.uint64</code></dt>
+<dt id="project.eods.delegated_validator.DelegatedValidator.rewards"><code class="name">var <span class="ident">rewards</span> : numpy.uint64</code></dt>
 <dd>
 <div class="desc"></div>
 </dd>
-<dt id="src.eods.delegated_validator.DelegatedValidator.total_delegated_balance"><code class="name">var <span class="ident">total_delegated_balance</span> : numpy.uint64</code></dt>
+<dt id="project.eods.delegated_validator.DelegatedValidator.total_delegated_balance"><code class="name">var <span class="ident">total_delegated_balance</span> : numpy.uint64</code></dt>
 <dd>
 <div class="desc"></div>
 </dd>
-<dt id="src.eods.delegated_validator.DelegatedValidator.validator_balance"><code class="name">var <span class="ident">validator_balance</span> : numpy.uint64</code></dt>
+<dt id="project.eods.delegated_validator.DelegatedValidator.validator_balance"><code class="name">var <span class="ident">validator_balance</span> : numpy.uint64</code></dt>
 <dd>
 <div class="desc"></div>
 </dd>
-<dt id="src.eods.delegated_validator.DelegatedValidator.validator_quota"><code class="name">var <span class="ident">validator_quota</span> : numpy.uint64</code></dt>
+<dt id="project.eods.delegated_validator.DelegatedValidator.validator_quota"><code class="name">var <span class="ident">validator_quota</span> : numpy.uint64</code></dt>
 <dd>
 <div class="desc"></div>
 </dd>
 </dl>
 <h3>Methods</h3>
 <dl>
-<dt id="src.eods.delegated_validator.DelegatedValidator.process_delegation"><code class="name flex">
+<dt id="project.eods.delegated_validator.DelegatedValidator.process_delegation"><code class="name flex">
 <span>def <span class="ident">process_delegation</span></span>(<span>self, delegator_index: int, amount: numpy.uint64)</span>
 </code></dt>
 <dd>
@@ -276,7 +278,7 @@ It defines quotas, tracks balances, and facilitates operations related to delega
 </details>
 <div class="desc"><p>Method to process a delegation from a delegator with <code>delegator_index</code> towards the delegated validator</p></div>
 </dd>
-<dt id="src.eods.delegated_validator.DelegatedValidator.process_rewards_penalties"><code class="name flex">
+<dt id="project.eods.delegated_validator.DelegatedValidator.process_rewards_penalties"><code class="name flex">
 <span>def <span class="ident">process_rewards_penalties</span></span>(<span>self)</span>
 </code></dt>
 <dd>
@@ -298,15 +300,15 @@ It defines quotas, tracks balances, and facilitates operations related to delega
 </details>
 <div class="desc"><p>This method processes the rewards and penalties.</p></div>
 </dd>
-<dt id="src.eods.delegated_validator.DelegatedValidator.process_withdrawal"><code class="name flex">
-<span>def <span class="ident">process_withdrawal</span></span>(<span>self, delegator_index: int, amount: numpy.uint64)</span>
+<dt id="project.eods.delegated_validator.DelegatedValidator.process_withdrawal"><code class="name flex">
+<span>def <span class="ident">process_withdrawal</span></span>(<span>self, delegator_index: int, amount: numpy.uint64) ‑> numpy.uint64</span>
 </code></dt>
 <dd>
 <details class="source">
 <summary>
 <span>Expand source code</span>
 </summary>
-<pre><code class="python">def process_withdrawal(self, delegator_index: int, amount: Gwei):
+<pre><code class="python">def process_withdrawal(self, delegator_index: int, amount: Gwei) -&gt; Gwei:
     &#34;&#34;&#34;
     Method to process a withdrawal of balance from the delegated validator towards a delegator with `delegator_index`
     &#34;&#34;&#34;
@@ -325,7 +327,9 @@ It defines quotas, tracks balances, and facilitates operations related to delega
 
     self._recalculate_quotas()
 
-    self.debug_total_withdrawn += withdrawable_amount</code></pre>
+    self.debug_total_withdrawn += withdrawable_amount
+    
+    return withdrawable_amount</code></pre>
 </details>
 <div class="desc"><p>Method to process a withdrawal of balance from the delegated validator towards a delegator with <code>delegator_index</code></p></div>
 </dd>
@@ -341,30 +345,30 @@ It defines quotas, tracks balances, and facilitates operations related to delega
 <ul id="index">
 <li><h3>Super-module</h3>
 <ul>
-<li><code><a title="src.eods" href="index.html">src.eods</a></code></li>
+<li><code><a title="project.eods" href="index.html">project.eods</a></code></li>
 </ul>
 </li>
 <li><h3><a href="#header-classes">Classes</a></h3>
 <ul>
 <li>
-<h4><code><a title="src.eods.delegated_validator.DelegatedValidator" href="#src.eods.delegated_validator.DelegatedValidator">DelegatedValidator</a></code></h4>
+<h4><code><a title="project.eods.delegated_validator.DelegatedValidator" href="#project.eods.delegated_validator.DelegatedValidator">DelegatedValidator</a></code></h4>
 <ul class="">
-<li><code><a title="src.eods.delegated_validator.DelegatedValidator.debug_total_delegated" href="#src.eods.delegated_validator.DelegatedValidator.debug_total_delegated">debug_total_delegated</a></code></li>
-<li><code><a title="src.eods.delegated_validator.DelegatedValidator.debug_total_penalties" href="#src.eods.delegated_validator.DelegatedValidator.debug_total_penalties">debug_total_penalties</a></code></li>
-<li><code><a title="src.eods.delegated_validator.DelegatedValidator.debug_total_rewards" href="#src.eods.delegated_validator.DelegatedValidator.debug_total_rewards">debug_total_rewards</a></code></li>
-<li><code><a title="src.eods.delegated_validator.DelegatedValidator.debug_total_withdrawn" href="#src.eods.delegated_validator.DelegatedValidator.debug_total_withdrawn">debug_total_withdrawn</a></code></li>
-<li><code><a title="src.eods.delegated_validator.DelegatedValidator.delegated_balances" href="#src.eods.delegated_validator.DelegatedValidator.delegated_balances">delegated_balances</a></code></li>
-<li><code><a title="src.eods.delegated_validator.DelegatedValidator.delegated_validator" href="#src.eods.delegated_validator.DelegatedValidator.delegated_validator">delegated_validator</a></code></li>
-<li><code><a title="src.eods.delegated_validator.DelegatedValidator.delegator_quotas" href="#src.eods.delegated_validator.DelegatedValidator.delegator_quotas">delegator_quotas</a></code></li>
-<li><code><a title="src.eods.delegated_validator.DelegatedValidator.initial_balance" href="#src.eods.delegated_validator.DelegatedValidator.initial_balance">initial_balance</a></code></li>
-<li><code><a title="src.eods.delegated_validator.DelegatedValidator.penalties" href="#src.eods.delegated_validator.DelegatedValidator.penalties">penalties</a></code></li>
-<li><code><a title="src.eods.delegated_validator.DelegatedValidator.process_delegation" href="#src.eods.delegated_validator.DelegatedValidator.process_delegation">process_delegation</a></code></li>
-<li><code><a title="src.eods.delegated_validator.DelegatedValidator.process_rewards_penalties" href="#src.eods.delegated_validator.DelegatedValidator.process_rewards_penalties">process_rewards_penalties</a></code></li>
-<li><code><a title="src.eods.delegated_validator.DelegatedValidator.process_withdrawal" href="#src.eods.delegated_validator.DelegatedValidator.process_withdrawal">process_withdrawal</a></code></li>
-<li><code><a title="src.eods.delegated_validator.DelegatedValidator.rewards" href="#src.eods.delegated_validator.DelegatedValidator.rewards">rewards</a></code></li>
-<li><code><a title="src.eods.delegated_validator.DelegatedValidator.total_delegated_balance" href="#src.eods.delegated_validator.DelegatedValidator.total_delegated_balance">total_delegated_balance</a></code></li>
-<li><code><a title="src.eods.delegated_validator.DelegatedValidator.validator_balance" href="#src.eods.delegated_validator.DelegatedValidator.validator_balance">validator_balance</a></code></li>
-<li><code><a title="src.eods.delegated_validator.DelegatedValidator.validator_quota" href="#src.eods.delegated_validator.DelegatedValidator.validator_quota">validator_quota</a></code></li>
+<li><code><a title="project.eods.delegated_validator.DelegatedValidator.debug_total_delegated" href="#project.eods.delegated_validator.DelegatedValidator.debug_total_delegated">debug_total_delegated</a></code></li>
+<li><code><a title="project.eods.delegated_validator.DelegatedValidator.debug_total_penalties" href="#project.eods.delegated_validator.DelegatedValidator.debug_total_penalties">debug_total_penalties</a></code></li>
+<li><code><a title="project.eods.delegated_validator.DelegatedValidator.debug_total_rewards" href="#project.eods.delegated_validator.DelegatedValidator.debug_total_rewards">debug_total_rewards</a></code></li>
+<li><code><a title="project.eods.delegated_validator.DelegatedValidator.debug_total_withdrawn" href="#project.eods.delegated_validator.DelegatedValidator.debug_total_withdrawn">debug_total_withdrawn</a></code></li>
+<li><code><a title="project.eods.delegated_validator.DelegatedValidator.delegated_balances" href="#project.eods.delegated_validator.DelegatedValidator.delegated_balances">delegated_balances</a></code></li>
+<li><code><a title="project.eods.delegated_validator.DelegatedValidator.delegated_validator" href="#project.eods.delegated_validator.DelegatedValidator.delegated_validator">delegated_validator</a></code></li>
+<li><code><a title="project.eods.delegated_validator.DelegatedValidator.delegator_quotas" href="#project.eods.delegated_validator.DelegatedValidator.delegator_quotas">delegator_quotas</a></code></li>
+<li><code><a title="project.eods.delegated_validator.DelegatedValidator.initial_balance" href="#project.eods.delegated_validator.DelegatedValidator.initial_balance">initial_balance</a></code></li>
+<li><code><a title="project.eods.delegated_validator.DelegatedValidator.penalties" href="#project.eods.delegated_validator.DelegatedValidator.penalties">penalties</a></code></li>
+<li><code><a title="project.eods.delegated_validator.DelegatedValidator.process_delegation" href="#project.eods.delegated_validator.DelegatedValidator.process_delegation">process_delegation</a></code></li>
+<li><code><a title="project.eods.delegated_validator.DelegatedValidator.process_rewards_penalties" href="#project.eods.delegated_validator.DelegatedValidator.process_rewards_penalties">process_rewards_penalties</a></code></li>
+<li><code><a title="project.eods.delegated_validator.DelegatedValidator.process_withdrawal" href="#project.eods.delegated_validator.DelegatedValidator.process_withdrawal">process_withdrawal</a></code></li>
+<li><code><a title="project.eods.delegated_validator.DelegatedValidator.rewards" href="#project.eods.delegated_validator.DelegatedValidator.rewards">rewards</a></code></li>
+<li><code><a title="project.eods.delegated_validator.DelegatedValidator.total_delegated_balance" href="#project.eods.delegated_validator.DelegatedValidator.total_delegated_balance">total_delegated_balance</a></code></li>
+<li><code><a title="project.eods.delegated_validator.DelegatedValidator.validator_balance" href="#project.eods.delegated_validator.DelegatedValidator.validator_balance">validator_balance</a></code></li>
+<li><code><a title="project.eods.delegated_validator.DelegatedValidator.validator_quota" href="#project.eods.delegated_validator.DelegatedValidator.validator_quota">validator_quota</a></code></li>
 </ul>
 </li>
 </ul>

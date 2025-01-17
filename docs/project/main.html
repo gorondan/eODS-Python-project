@@ -4,8 +4,9 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1">
 <meta name="generator" content="pdoc3 0.11.5">
-<title>src.eods.custom_types API documentation</title>
-<meta name="description" content="This module defines the custom types used by the program.">
+<title>project.main API documentation</title>
+<meta name="description" content="This project is designed to test, validate, and refine the foundational concepts
+that will serve as the cornerstone for eODS.">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/13.0.0/sanitize.min.css" integrity="sha512-y1dtMcuvtTMJc1yPgEqF0ZjQbhnc/bFhyvIyVNb9Zk5mIGtqVaAB1Ttl28su8AvFMOY0EwRbAe+HCLqj6W7/KA==" crossorigin>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/13.0.0/typography.min.css" integrity="sha512-Y1DYSb995BAfxobCkKepB1BqJJTPrOp3zPL74AWFugHHmmdcvO+C48WLrUOlhGMc0QG7AE3f7gmvvcrmX2fDoA==" crossorigin>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/default.min.css" crossorigin>
@@ -33,10 +34,11 @@ el.replaceWith(d);
 <main>
 <article id="content">
 <header>
-<h1 class="title">Module <code>src.eods.custom_types</code></h1>
+<h1 class="title">Module <code>project.main</code></h1>
 </header>
 <section id="section-intro">
-<p>This module defines the custom types used by the program.</p>
+<p>This project is designed to test, validate, and refine the foundational concepts
+that will serve as the cornerstone for eODS.</p>
 </section>
 <section>
 </section>
@@ -45,6 +47,49 @@ el.replaceWith(d);
 <section>
 </section>
 <section>
+<h2 class="section-title" id="header-classes">Classes</h2>
+<dl>
+<dt id="project.main.Main"><code class="flex name class">
+<span>class <span class="ident">Main</span></span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class Main:
+    beacon_chain_accounting = BeaconChainAccounting()
+
+    simulator = Simulator(beacon_chain_accounting)
+    simulator.initialize_required_data()
+
+    for _ in range(num_ticks):
+        simulator.tick_delegation()
+        simulator.process_rewards_penalties()
+        simulator.tick_withdrawals()
+
+    tester = Tester(beacon_chain_accounting)
+    assert tester.test_quotas_sum_to_be_1()
+    assert tester.test_delegated_amount_is_positive()</code></pre>
+</details>
+<div class="desc"></div>
+<h3>Class variables</h3>
+<dl>
+<dt id="project.main.Main.beacon_chain_accounting"><code class="name">var <span class="ident">beacon_chain_accounting</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="project.main.Main.simulator"><code class="name">var <span class="ident">simulator</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="project.main.Main.tester"><code class="name">var <span class="ident">tester</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+</dl>
+</dd>
+</dl>
 </section>
 </article>
 <nav id="sidebar">
@@ -54,7 +99,19 @@ el.replaceWith(d);
 <ul id="index">
 <li><h3>Super-module</h3>
 <ul>
-<li><code><a title="src.eods" href="index.html">src.eods</a></code></li>
+<li><code><a title="project" href="index.html">project</a></code></li>
+</ul>
+</li>
+<li><h3><a href="#header-classes">Classes</a></h3>
+<ul>
+<li>
+<h4><code><a title="project.main.Main" href="#project.main.Main">Main</a></code></h4>
+<ul class="">
+<li><code><a title="project.main.Main.beacon_chain_accounting" href="#project.main.Main.beacon_chain_accounting">beacon_chain_accounting</a></code></li>
+<li><code><a title="project.main.Main.simulator" href="#project.main.Main.simulator">simulator</a></code></li>
+<li><code><a title="project.main.Main.tester" href="#project.main.Main.tester">tester</a></code></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>

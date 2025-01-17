@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1">
 <meta name="generator" content="pdoc3 0.11.5">
-<title>src.eods.beacon_chain_accounting API documentation</title>
+<title>project.eods.beacon_chain_accounting API documentation</title>
 <meta name="description" content="This module modifies the state of the beacon chain accounting protocol gadget.">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/13.0.0/sanitize.min.css" integrity="sha512-y1dtMcuvtTMJc1yPgEqF0ZjQbhnc/bFhyvIyVNb9Zk5mIGtqVaAB1Ttl28su8AvFMOY0EwRbAe+HCLqj6W7/KA==" crossorigin>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/13.0.0/typography.min.css" integrity="sha512-Y1DYSb995BAfxobCkKepB1BqJJTPrOp3zPL74AWFugHHmmdcvO+C48WLrUOlhGMc0QG7AE3f7gmvvcrmX2fDoA==" crossorigin>
@@ -33,7 +33,7 @@ el.replaceWith(d);
 <main>
 <article id="content">
 <header>
-<h1 class="title">Module <code>src.eods.beacon_chain_accounting</code></h1>
+<h1 class="title">Module <code>project.eods.beacon_chain_accounting</code></h1>
 </header>
 <section id="section-intro">
 <p>This module modifies the state of the beacon chain accounting protocol gadget.</p>
@@ -47,7 +47,7 @@ el.replaceWith(d);
 <section>
 <h2 class="section-title" id="header-classes">Classes</h2>
 <dl>
-<dt id="src.eods.beacon_chain_accounting.BeaconChainAccounting"><code class="flex name class">
+<dt id="project.eods.beacon_chain_accounting.BeaconChainAccounting"><code class="flex name class">
 <span>class <span class="ident">BeaconChainAccounting</span></span>
 </code></dt>
 <dd>
@@ -57,7 +57,7 @@ el.replaceWith(d);
 </summary>
 <pre><code class="python">class BeaconChainAccounting:
     &#34;&#34;&#34;
-    This class is responsible for exposing the balance sheet operations - delegations and withdrawals.
+    This class is responsible for exposing the balance sheet operations - deposit to delegator balance, delegations toward and withdrawals.
     
     These are the different contexts of depositing/withdrawing:
         deposit_to_delegate_contract -&gt; delegator balance : deposit_to_delegator_balance
@@ -105,10 +105,12 @@ el.replaceWith(d);
             self.delegated_validators_registry.create_delegated_validator(validator, amount)
 
         self.delegated_validators_registry.process_delegation(delegator_index, validator.pubkey, amount)
+        
+        self.delegators_registry.decrease_delegator_balance(delegator_index, amount)
 
     def withdraw_from_validator(self, delegator_index: DelegatorIndex, validator_pubkey: BLSPubkey, amount: Gwei):
         &#34;&#34;&#34;
-        This method acts as an entrypoint for withdrawal. 
+        This method acts as an entrypoint for withdrawal from a validator. 
         Args:
             delegator_index (DelegatorIndex): The index of the delegator.
             validator_pubkey (BLSPubkey): The public key of the validator.
@@ -123,9 +125,11 @@ el.replaceWith(d);
         if not self.delegated_validators_registry.is_validator_delegated(validator.pubkey):
             raise ValueError(&#34;Validator with the provided pubkey is not delegated validator&#34;)
 
-        self.delegated_validators_registry.process_withdrawal(delegator_index, validator.pubkey, amount)</code></pre>
+        withdrawal_amount = self.delegated_validators_registry.process_withdrawal(delegator_index, validator.pubkey, amount)
+
+        self.delegators_registry.increase_delegator_balance(delegator_index, withdrawal_amount)</code></pre>
 </details>
-<div class="desc"><p>This class is responsible for exposing the balance sheet operations - delegations and withdrawals.</p>
+<div class="desc"><p>This class is responsible for exposing the balance sheet operations - deposit to delegator balance, delegations toward and withdrawals.</p>
 <p>These are the different contexts of depositing/withdrawing:
 deposit_to_delegate_contract -&gt; delegator balance : deposit_to_delegator_balance
 ExecutionAddress &lt;- delegator balance : withdraw_from_delegator_balance
@@ -133,22 +137,22 @@ delegator balance -&gt; validator : delegate_to_validator
 delegator balance &lt;- validator : withdraw_from_validator</p></div>
 <h3>Class variables</h3>
 <dl>
-<dt id="src.eods.beacon_chain_accounting.BeaconChainAccounting.delegated_validators_registry"><code class="name">var <span class="ident">delegated_validators_registry</span> : eods.delegated_validators_registry.DelegatedValidatorsRegistry</code></dt>
+<dt id="project.eods.beacon_chain_accounting.BeaconChainAccounting.delegated_validators_registry"><code class="name">var <span class="ident">delegated_validators_registry</span> : eods.delegated_validators_registry.DelegatedValidatorsRegistry</code></dt>
 <dd>
 <div class="desc"></div>
 </dd>
-<dt id="src.eods.beacon_chain_accounting.BeaconChainAccounting.delegators_registry"><code class="name">var <span class="ident">delegators_registry</span> : eods.delegators_registry.DelegatorsRegistry</code></dt>
+<dt id="project.eods.beacon_chain_accounting.BeaconChainAccounting.delegators_registry"><code class="name">var <span class="ident">delegators_registry</span> : eods.delegators_registry.DelegatorsRegistry</code></dt>
 <dd>
 <div class="desc"></div>
 </dd>
-<dt id="src.eods.beacon_chain_accounting.BeaconChainAccounting.validators_registry"><code class="name">var <span class="ident">validators_registry</span> : protocol.validators_registry.ValidatorsRegistry</code></dt>
+<dt id="project.eods.beacon_chain_accounting.BeaconChainAccounting.validators_registry"><code class="name">var <span class="ident">validators_registry</span> : protocol.validators_registry.ValidatorsRegistry</code></dt>
 <dd>
 <div class="desc"></div>
 </dd>
 </dl>
 <h3>Methods</h3>
 <dl>
-<dt id="src.eods.beacon_chain_accounting.BeaconChainAccounting.delegate_to_validator"><code class="name flex">
+<dt id="project.eods.beacon_chain_accounting.BeaconChainAccounting.delegate_to_validator"><code class="name flex">
 <span>def <span class="ident">delegate_to_validator</span></span>(<span>self,<br>delegator_index: numpy.uint64,<br>validator_pubkey: ByteString,<br>amount: numpy.uint64)</span>
 </code></dt>
 <dd>
@@ -172,7 +176,9 @@ delegator balance &lt;- validator : withdraw_from_validator</p></div>
     if not self.delegated_validators_registry.is_validator_delegated(validator.pubkey):
         self.delegated_validators_registry.create_delegated_validator(validator, amount)
 
-    self.delegated_validators_registry.process_delegation(delegator_index, validator.pubkey, amount)</code></pre>
+    self.delegated_validators_registry.process_delegation(delegator_index, validator.pubkey, amount)
+    
+    self.delegators_registry.decrease_delegator_balance(delegator_index, amount)</code></pre>
 </details>
 <div class="desc"><p>This method acts as an entrypoint for delegation. It creates a delegated validator if needed and
 it funds it with a given amount.</p>
@@ -186,7 +192,7 @@ it funds it with a given amount.</p>
 <dd>The amount delegated.</dd>
 </dl></div>
 </dd>
-<dt id="src.eods.beacon_chain_accounting.BeaconChainAccounting.deposit_to_delegator_balance"><code class="name flex">
+<dt id="project.eods.beacon_chain_accounting.BeaconChainAccounting.deposit_to_delegator_balance"><code class="name flex">
 <span>def <span class="ident">deposit_to_delegator_balance</span></span>(<span>self, pubkey: ByteString, amount: numpy.uint64)</span>
 </code></dt>
 <dd>
@@ -204,7 +210,7 @@ it funds it with a given amount.</p>
 <div class="desc"><p>This method will deposit an amount to a delegator's balance.
 If there is no delegator the registry will create one.</p></div>
 </dd>
-<dt id="src.eods.beacon_chain_accounting.BeaconChainAccounting.withdraw_from_delegator_balance"><code class="name flex">
+<dt id="project.eods.beacon_chain_accounting.BeaconChainAccounting.withdraw_from_delegator_balance"><code class="name flex">
 <span>def <span class="ident">withdraw_from_delegator_balance</span></span>(<span>self, pubkey: ByteString, amount: numpy.uint64)</span>
 </code></dt>
 <dd>
@@ -220,7 +226,7 @@ If there is no delegator the registry will create one.</p></div>
 </details>
 <div class="desc"><p>This method facilitates withdrawal from a delegator's balance.</p></div>
 </dd>
-<dt id="src.eods.beacon_chain_accounting.BeaconChainAccounting.withdraw_from_validator"><code class="name flex">
+<dt id="project.eods.beacon_chain_accounting.BeaconChainAccounting.withdraw_from_validator"><code class="name flex">
 <span>def <span class="ident">withdraw_from_validator</span></span>(<span>self,<br>delegator_index: numpy.uint64,<br>validator_pubkey: ByteString,<br>amount: numpy.uint64)</span>
 </code></dt>
 <dd>
@@ -230,7 +236,7 @@ If there is no delegator the registry will create one.</p></div>
 </summary>
 <pre><code class="python">def withdraw_from_validator(self, delegator_index: DelegatorIndex, validator_pubkey: BLSPubkey, amount: Gwei):
     &#34;&#34;&#34;
-    This method acts as an entrypoint for withdrawal. 
+    This method acts as an entrypoint for withdrawal from a validator. 
     Args:
         delegator_index (DelegatorIndex): The index of the delegator.
         validator_pubkey (BLSPubkey): The public key of the validator.
@@ -245,9 +251,11 @@ If there is no delegator the registry will create one.</p></div>
     if not self.delegated_validators_registry.is_validator_delegated(validator.pubkey):
         raise ValueError(&#34;Validator with the provided pubkey is not delegated validator&#34;)
 
-    self.delegated_validators_registry.process_withdrawal(delegator_index, validator.pubkey, amount)</code></pre>
+    withdrawal_amount = self.delegated_validators_registry.process_withdrawal(delegator_index, validator.pubkey, amount)
+
+    self.delegators_registry.increase_delegator_balance(delegator_index, withdrawal_amount)</code></pre>
 </details>
-<div class="desc"><p>This method acts as an entrypoint for withdrawal. </p>
+<div class="desc"><p>This method acts as an entrypoint for withdrawal from a validator. </p>
 <h2 id="args">Args</h2>
 <dl>
 <dt><strong><code>delegator_index</code></strong> :&ensp;<code>DelegatorIndex</code></dt>
@@ -270,21 +278,21 @@ If there is no delegator the registry will create one.</p></div>
 <ul id="index">
 <li><h3>Super-module</h3>
 <ul>
-<li><code><a title="src.eods" href="index.html">src.eods</a></code></li>
+<li><code><a title="project.eods" href="index.html">project.eods</a></code></li>
 </ul>
 </li>
 <li><h3><a href="#header-classes">Classes</a></h3>
 <ul>
 <li>
-<h4><code><a title="src.eods.beacon_chain_accounting.BeaconChainAccounting" href="#src.eods.beacon_chain_accounting.BeaconChainAccounting">BeaconChainAccounting</a></code></h4>
+<h4><code><a title="project.eods.beacon_chain_accounting.BeaconChainAccounting" href="#project.eods.beacon_chain_accounting.BeaconChainAccounting">BeaconChainAccounting</a></code></h4>
 <ul class="">
-<li><code><a title="src.eods.beacon_chain_accounting.BeaconChainAccounting.delegate_to_validator" href="#src.eods.beacon_chain_accounting.BeaconChainAccounting.delegate_to_validator">delegate_to_validator</a></code></li>
-<li><code><a title="src.eods.beacon_chain_accounting.BeaconChainAccounting.delegated_validators_registry" href="#src.eods.beacon_chain_accounting.BeaconChainAccounting.delegated_validators_registry">delegated_validators_registry</a></code></li>
-<li><code><a title="src.eods.beacon_chain_accounting.BeaconChainAccounting.delegators_registry" href="#src.eods.beacon_chain_accounting.BeaconChainAccounting.delegators_registry">delegators_registry</a></code></li>
-<li><code><a title="src.eods.beacon_chain_accounting.BeaconChainAccounting.deposit_to_delegator_balance" href="#src.eods.beacon_chain_accounting.BeaconChainAccounting.deposit_to_delegator_balance">deposit_to_delegator_balance</a></code></li>
-<li><code><a title="src.eods.beacon_chain_accounting.BeaconChainAccounting.validators_registry" href="#src.eods.beacon_chain_accounting.BeaconChainAccounting.validators_registry">validators_registry</a></code></li>
-<li><code><a title="src.eods.beacon_chain_accounting.BeaconChainAccounting.withdraw_from_delegator_balance" href="#src.eods.beacon_chain_accounting.BeaconChainAccounting.withdraw_from_delegator_balance">withdraw_from_delegator_balance</a></code></li>
-<li><code><a title="src.eods.beacon_chain_accounting.BeaconChainAccounting.withdraw_from_validator" href="#src.eods.beacon_chain_accounting.BeaconChainAccounting.withdraw_from_validator">withdraw_from_validator</a></code></li>
+<li><code><a title="project.eods.beacon_chain_accounting.BeaconChainAccounting.delegate_to_validator" href="#project.eods.beacon_chain_accounting.BeaconChainAccounting.delegate_to_validator">delegate_to_validator</a></code></li>
+<li><code><a title="project.eods.beacon_chain_accounting.BeaconChainAccounting.delegated_validators_registry" href="#project.eods.beacon_chain_accounting.BeaconChainAccounting.delegated_validators_registry">delegated_validators_registry</a></code></li>
+<li><code><a title="project.eods.beacon_chain_accounting.BeaconChainAccounting.delegators_registry" href="#project.eods.beacon_chain_accounting.BeaconChainAccounting.delegators_registry">delegators_registry</a></code></li>
+<li><code><a title="project.eods.beacon_chain_accounting.BeaconChainAccounting.deposit_to_delegator_balance" href="#project.eods.beacon_chain_accounting.BeaconChainAccounting.deposit_to_delegator_balance">deposit_to_delegator_balance</a></code></li>
+<li><code><a title="project.eods.beacon_chain_accounting.BeaconChainAccounting.validators_registry" href="#project.eods.beacon_chain_accounting.BeaconChainAccounting.validators_registry">validators_registry</a></code></li>
+<li><code><a title="project.eods.beacon_chain_accounting.BeaconChainAccounting.withdraw_from_delegator_balance" href="#project.eods.beacon_chain_accounting.BeaconChainAccounting.withdraw_from_delegator_balance">withdraw_from_delegator_balance</a></code></li>
+<li><code><a title="project.eods.beacon_chain_accounting.BeaconChainAccounting.withdraw_from_validator" href="#project.eods.beacon_chain_accounting.BeaconChainAccounting.withdraw_from_validator">withdraw_from_validator</a></code></li>
 </ul>
 </li>
 </ul>
