@@ -95,12 +95,14 @@ el.replaceWith(d);
         delegated_validator = self._get_delegated_validator_by_id(pubkey)
         delegated_validator.process_delegation(delegator_index, amount)
 
-    def process_withdrawal(self, delegator_index: DelegatorIndex, pubkey: BLSPubkey, amount: Gwei):
+    def process_withdrawal(self, delegator_index: DelegatorIndex, pubkey: BLSPubkey, amount: Gwei) -&gt; Gwei:
         &#34;&#34;&#34;
         This method uses the delegated validator to process a withdrawal.
         &#34;&#34;&#34;
         delegated_validator = self._get_delegated_validator_by_id(pubkey)
-        delegated_validator.process_withdrawal(delegator_index, amount)
+        
+        return delegated_validator.process_withdrawal(delegator_index, amount)
+
 
     def process_rewards_penalties(self):
         &#34;&#34;&#34;
@@ -213,19 +215,20 @@ el.replaceWith(d);
 <div class="desc"><p>This method uses the delegated validator to process the rewards and penalties.</p></div>
 </dd>
 <dt id="src.eods.delegated_validators_registry.DelegatedValidatorsRegistry.process_withdrawal"><code class="name flex">
-<span>def <span class="ident">process_withdrawal</span></span>(<span>self, delegator_index: numpy.uint64, pubkey: ByteString, amount: numpy.uint64)</span>
+<span>def <span class="ident">process_withdrawal</span></span>(<span>self, delegator_index: numpy.uint64, pubkey: ByteString, amount: numpy.uint64) ‑> numpy.uint64</span>
 </code></dt>
 <dd>
 <details class="source">
 <summary>
 <span>Expand source code</span>
 </summary>
-<pre><code class="python">def process_withdrawal(self, delegator_index: DelegatorIndex, pubkey: BLSPubkey, amount: Gwei):
+<pre><code class="python">def process_withdrawal(self, delegator_index: DelegatorIndex, pubkey: BLSPubkey, amount: Gwei) -&gt; Gwei:
     &#34;&#34;&#34;
     This method uses the delegated validator to process a withdrawal.
     &#34;&#34;&#34;
     delegated_validator = self._get_delegated_validator_by_id(pubkey)
-    delegated_validator.process_withdrawal(delegator_index, amount)</code></pre>
+    
+    return delegated_validator.process_withdrawal(delegator_index, amount)</code></pre>
 </details>
 <div class="desc"><p>This method uses the delegated validator to process a withdrawal.</p></div>
 </dd>

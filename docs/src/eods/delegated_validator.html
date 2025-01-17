@@ -96,7 +96,7 @@ el.replaceWith(d);
         self.debug_total_penalties = 0
         
 
-    def process_withdrawal(self, delegator_index: int, amount: Gwei):
+    def process_withdrawal(self, delegator_index: int, amount: Gwei) -&gt; Gwei:
         &#34;&#34;&#34;
         Method to process a withdrawal of balance from the delegated validator towards a delegator with `delegator_index`
         &#34;&#34;&#34;
@@ -116,6 +116,8 @@ el.replaceWith(d);
         self._recalculate_quotas()
 
         self.debug_total_withdrawn += withdrawable_amount
+        
+        return withdrawable_amount
 
     def process_delegation(self, delegator_index: int, amount: Gwei):
         &#34;&#34;&#34;
@@ -299,14 +301,14 @@ It defines quotas, tracks balances, and facilitates operations related to delega
 <div class="desc"><p>This method processes the rewards and penalties.</p></div>
 </dd>
 <dt id="src.eods.delegated_validator.DelegatedValidator.process_withdrawal"><code class="name flex">
-<span>def <span class="ident">process_withdrawal</span></span>(<span>self, delegator_index: int, amount: numpy.uint64)</span>
+<span>def <span class="ident">process_withdrawal</span></span>(<span>self, delegator_index: int, amount: numpy.uint64) ‑> numpy.uint64</span>
 </code></dt>
 <dd>
 <details class="source">
 <summary>
 <span>Expand source code</span>
 </summary>
-<pre><code class="python">def process_withdrawal(self, delegator_index: int, amount: Gwei):
+<pre><code class="python">def process_withdrawal(self, delegator_index: int, amount: Gwei) -&gt; Gwei:
     &#34;&#34;&#34;
     Method to process a withdrawal of balance from the delegated validator towards a delegator with `delegator_index`
     &#34;&#34;&#34;
@@ -325,7 +327,9 @@ It defines quotas, tracks balances, and facilitates operations related to delega
 
     self._recalculate_quotas()
 
-    self.debug_total_withdrawn += withdrawable_amount</code></pre>
+    self.debug_total_withdrawn += withdrawable_amount
+    
+    return withdrawable_amount</code></pre>
 </details>
 <div class="desc"><p>Method to process a withdrawal of balance from the delegated validator towards a delegator with <code>delegator_index</code></p></div>
 </dd>

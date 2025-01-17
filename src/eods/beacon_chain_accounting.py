@@ -61,7 +61,7 @@ class BeaconChainAccounting:
 
     def withdraw_from_validator(self, delegator_index: DelegatorIndex, validator_pubkey: BLSPubkey, amount: Gwei):
         """
-        This method acts as an entrypoint for withdrawal. 
+        This method acts as an entrypoint for withdrawal from a validator. 
         Args:
             delegator_index (DelegatorIndex): The index of the delegator.
             validator_pubkey (BLSPubkey): The public key of the validator.
