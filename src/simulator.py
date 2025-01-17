@@ -1,3 +1,8 @@
+"""
+This module simulates an ecosystem in which we can test delegations.
+It generates new delegations, applies rewards, penalties, and slashings, 
+and processes withdrawals.
+"""
 import random
 import secrets
 import math

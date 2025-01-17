@@ -1,3 +1,6 @@
+"""
+This module contains functions used to test the generated data. 
+"""
 import math
 from eods.beacon_chain_accounting import BeaconChainAccounting
 

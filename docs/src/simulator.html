@@ -5,7 +5,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1">
 <meta name="generator" content="pdoc3 0.11.5">
 <title>src.simulator API documentation</title>
-<meta name="description" content="">
+<meta name="description" content="This module simulates an ecosystem in which we can test delegations.
+It generates new delegations, applies rewards, penalties, and slashings,
+and …">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/13.0.0/sanitize.min.css" integrity="sha512-y1dtMcuvtTMJc1yPgEqF0ZjQbhnc/bFhyvIyVNb9Zk5mIGtqVaAB1Ttl28su8AvFMOY0EwRbAe+HCLqj6W7/KA==" crossorigin>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/13.0.0/typography.min.css" integrity="sha512-Y1DYSb995BAfxobCkKepB1BqJJTPrOp3zPL74AWFugHHmmdcvO+C48WLrUOlhGMc0QG7AE3f7gmvvcrmX2fDoA==" crossorigin>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/default.min.css" crossorigin>
@@ -36,6 +38,9 @@ el.replaceWith(d);
 <h1 class="title">Module <code>src.simulator</code></h1>
 </header>
 <section id="section-intro">
+<p>This module simulates an ecosystem in which we can test delegations.
+It generates new delegations, applies rewards, penalties, and slashings,
+and processes withdrawals.</p>
 </section>
 <section>
 </section>
@@ -71,7 +76,6 @@ el.replaceWith(d);
         &#34;&#34;&#34;
         This method generates the initial set of validators and delegators.
         &#34;&#34;&#34;
-        
         # generate the validators
         num_validators_to_generate = random.randint(constants.min_validators, constants.max_validators)
         
@@ -115,10 +119,10 @@ el.replaceWith(d);
             
             self.beacon_chain_accounting.delegate_to_validator(delegator_index, validator_key, delegated_amount)
 
-    &#34;&#34;&#34;
-    This method creates a random number of withdrawals with a random amount of withdrawed GWEI.
-    &#34;&#34;&#34;
     def tick_withdrawals(self):
+        &#34;&#34;&#34;
+        This method creates a random number of withdrawals with a random amount of withdrawed GWEI.
+        &#34;&#34;&#34;
         num_withdrawals = random.randint(constants.min_withdrawals_per_tick, constants.max_withdrawals_per_tick)
         
         for _ in range(num_withdrawals):
@@ -138,10 +142,10 @@ el.replaceWith(d);
 
                 self.beacon_chain_accounting.withdraw_from_validator(delegator_index, delegated_validator.delegated_validator.pubkey, withdrawed_amount)
       
-    &#34;&#34;&#34;
-    This method generated the rewards, penalties and slashings for the validators and delegators.
-    &#34;&#34;&#34;    
     def process_rewards_penalties(self):
+        &#34;&#34;&#34;
+        This method generates the rewards, penalties and slashings to be applied to the validator balances.
+        &#34;&#34;&#34;    
         delegated_validators = self.beacon_chain_accounting.delegated_validators_registry.delegated_validators
 
         for delegated_validator in delegated_validators:
@@ -184,7 +188,6 @@ and processes withdrawals.</p></div>
     &#34;&#34;&#34;
     This method generates the initial set of validators and delegators.
     &#34;&#34;&#34;
-    
     # generate the validators
     num_validators_to_generate = random.randint(constants.min_validators, constants.max_validators)
     
@@ -222,6 +225,9 @@ and processes withdrawals.</p></div>
 <span>Expand source code</span>
 </summary>
 <pre><code class="python">def process_rewards_penalties(self):
+    &#34;&#34;&#34;
+    This method generates the rewards, penalties and slashings to be applied to the validator balances.
+    &#34;&#34;&#34;    
     delegated_validators = self.beacon_chain_accounting.delegated_validators_registry.delegated_validators
 
     for delegated_validator in delegated_validators:
@@ -240,7 +246,7 @@ and processes withdrawals.</p></div>
     
     self.beacon_chain_accounting.delegated_validators_registry.process_rewards_penalties()</code></pre>
 </details>
-<div class="desc"></div>
+<div class="desc"><p>This method generates the rewards, penalties and slashings to be applied to the validator balances.</p></div>
 </dd>
 <dt id="src.simulator.Simulator.tick_delegation"><code class="name flex">
 <span>def <span class="ident">tick_delegation</span></span>(<span>self)</span>
@@ -278,6 +284,9 @@ and processes withdrawals.</p></div>
 <span>Expand source code</span>
 </summary>
 <pre><code class="python">def tick_withdrawals(self):
+    &#34;&#34;&#34;
+    This method creates a random number of withdrawals with a random amount of withdrawed GWEI.
+    &#34;&#34;&#34;
     num_withdrawals = random.randint(constants.min_withdrawals_per_tick, constants.max_withdrawals_per_tick)
     
     for _ in range(num_withdrawals):
@@ -297,7 +306,7 @@ and processes withdrawals.</p></div>
 
             self.beacon_chain_accounting.withdraw_from_validator(delegator_index, delegated_validator.delegated_validator.pubkey, withdrawed_amount)</code></pre>
 </details>
-<div class="desc"></div>
+<div class="desc"><p>This method creates a random number of withdrawals with a random amount of withdrawed GWEI.</p></div>
 </dd>
 </dl>
 </dd>

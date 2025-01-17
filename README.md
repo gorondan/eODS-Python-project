@@ -19,8 +19,10 @@ Source eODS/run.sh file to run the project:
 
 ### 2. Generate the project's documentation:
 
+In `src`:
 `pdoc --html --output-dir ../docs --force .`
 
 ### 3. Generate the project's class diagram:
 
-`pyreverse --colorized -o png main.py simulator.py tester.py eods protocol`
+In `src`:
+`pyreverse --colorized -o jpg main.py simulator.py tester.py eods protocol`

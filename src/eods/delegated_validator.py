@@ -8,6 +8,7 @@ from protocol.validator import Validator
 class DelegatedValidator:
     """
     This class serves as a wrapper around a Validator, providing an abstraction for managing delegated amounts. 
+    It adds functionality to the Validator, functionality specific to eODS.
     It defines quotas, tracks balances, and facilitates operations related to delegation management.  `
     """
     initial_balance: Gwei

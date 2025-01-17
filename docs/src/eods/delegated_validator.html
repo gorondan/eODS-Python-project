@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1">
 <meta name="generator" content="pdoc3 0.11.5">
 <title>src.eods.delegated_validator API documentation</title>
-<meta name="description" content="">
+<meta name="description" content="This module defines the attributes of class delegated validator.">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/13.0.0/sanitize.min.css" integrity="sha512-y1dtMcuvtTMJc1yPgEqF0ZjQbhnc/bFhyvIyVNb9Zk5mIGtqVaAB1Ttl28su8AvFMOY0EwRbAe+HCLqj6W7/KA==" crossorigin>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/13.0.0/typography.min.css" integrity="sha512-Y1DYSb995BAfxobCkKepB1BqJJTPrOp3zPL74AWFugHHmmdcvO+C48WLrUOlhGMc0QG7AE3f7gmvvcrmX2fDoA==" crossorigin>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/default.min.css" crossorigin>
@@ -36,6 +36,7 @@ el.replaceWith(d);
 <h1 class="title">Module <code>src.eods.delegated_validator</code></h1>
 </header>
 <section id="section-intro">
+<p>This module defines the attributes of class delegated validator.</p>
 </section>
 <section>
 </section>
@@ -58,6 +59,7 @@ el.replaceWith(d);
 <pre><code class="python">class DelegatedValidator:
     &#34;&#34;&#34;
     This class serves as a wrapper around a Validator, providing an abstraction for managing delegated amounts. 
+    It adds functionality to the Validator, functionality specific to eODS.
     It defines quotas, tracks balances, and facilitates operations related to delegation management.  `
     &#34;&#34;&#34;
     initial_balance: Gwei
@@ -184,6 +186,7 @@ el.replaceWith(d);
             self.delegator_quotas[index] = 0 if self.validator_balance ==0 or self.total_delegated_balance  == 0 else delegated_amount / self.validator_balance</code></pre>
 </details>
 <div class="desc"><p>This class serves as a wrapper around a Validator, providing an abstraction for managing delegated amounts.
+It adds functionality to the Validator, functionality specific to eODS.
 It defines quotas, tracks balances, and facilitates operations related to delegation management.
 `</p></div>
 <h3>Class variables</h3>

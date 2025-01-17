@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1">
 <meta name="generator" content="pdoc3 0.11.5">
 <title>src.eods.delegated_validators_registry API documentation</title>
-<meta name="description" content="This module defines the methods that modify the state of the delegated validators registry">
+<meta name="description" content="This module modifies the state of the delegated validators registry.">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/13.0.0/sanitize.min.css" integrity="sha512-y1dtMcuvtTMJc1yPgEqF0ZjQbhnc/bFhyvIyVNb9Zk5mIGtqVaAB1Ttl28su8AvFMOY0EwRbAe+HCLqj6W7/KA==" crossorigin>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/13.0.0/typography.min.css" integrity="sha512-Y1DYSb995BAfxobCkKepB1BqJJTPrOp3zPL74AWFugHHmmdcvO+C48WLrUOlhGMc0QG7AE3f7gmvvcrmX2fDoA==" crossorigin>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/default.min.css" crossorigin>
@@ -36,7 +36,7 @@ el.replaceWith(d);
 <h1 class="title">Module <code>src.eods.delegated_validators_registry</code></h1>
 </header>
 <section id="section-intro">
-<p>This module defines the methods that modify the state of the delegated validators registry</p>
+<p>This module modifies the state of the delegated validators registry.</p>
 </section>
 <section>
 </section>
@@ -89,14 +89,23 @@ el.replaceWith(d);
         return is_delegated
 
     def process_delegation(self, delegator_index: DelegatorIndex, pubkey: BLSPubkey, amount: Gwei):
+        &#34;&#34;&#34;
+        This method uses the delegated validator to process a delegation.
+        &#34;&#34;&#34;
         delegated_validator = self._get_delegated_validator_by_id(pubkey)
         delegated_validator.process_delegation(delegator_index, amount)
 
     def process_withdrawal(self, delegator_index: DelegatorIndex, pubkey: BLSPubkey, amount: Gwei):
+        &#34;&#34;&#34;
+        This method uses the delegated validator to process a withdrawal.
+        &#34;&#34;&#34;
         delegated_validator = self._get_delegated_validator_by_id(pubkey)
         delegated_validator.process_withdrawal(delegator_index, amount)
 
     def process_rewards_penalties(self):
+        &#34;&#34;&#34;
+        This method uses the delegated validator to process the rewards and penalties.
+        &#34;&#34;&#34;
         for delegated_validator in self.delegated_validators:
             delegated_validator.process_rewards_penalties()
       
@@ -178,10 +187,13 @@ el.replaceWith(d);
 <span>Expand source code</span>
 </summary>
 <pre><code class="python">def process_delegation(self, delegator_index: DelegatorIndex, pubkey: BLSPubkey, amount: Gwei):
+    &#34;&#34;&#34;
+    This method uses the delegated validator to process a delegation.
+    &#34;&#34;&#34;
     delegated_validator = self._get_delegated_validator_by_id(pubkey)
     delegated_validator.process_delegation(delegator_index, amount)</code></pre>
 </details>
-<div class="desc"></div>
+<div class="desc"><p>This method uses the delegated validator to process a delegation.</p></div>
 </dd>
 <dt id="src.eods.delegated_validators_registry.DelegatedValidatorsRegistry.process_rewards_penalties"><code class="name flex">
 <span>def <span class="ident">process_rewards_penalties</span></span>(<span>self)</span>
@@ -192,10 +204,13 @@ el.replaceWith(d);
 <span>Expand source code</span>
 </summary>
 <pre><code class="python">def process_rewards_penalties(self):
+    &#34;&#34;&#34;
+    This method uses the delegated validator to process the rewards and penalties.
+    &#34;&#34;&#34;
     for delegated_validator in self.delegated_validators:
         delegated_validator.process_rewards_penalties()</code></pre>
 </details>
-<div class="desc"></div>
+<div class="desc"><p>This method uses the delegated validator to process the rewards and penalties.</p></div>
 </dd>
 <dt id="src.eods.delegated_validators_registry.DelegatedValidatorsRegistry.process_withdrawal"><code class="name flex">
 <span>def <span class="ident">process_withdrawal</span></span>(<span>self, delegator_index: numpy.uint64, pubkey: ByteString, amount: numpy.uint64)</span>
@@ -206,10 +221,13 @@ el.replaceWith(d);
 <span>Expand source code</span>
 </summary>
 <pre><code class="python">def process_withdrawal(self, delegator_index: DelegatorIndex, pubkey: BLSPubkey, amount: Gwei):
+    &#34;&#34;&#34;
+    This method uses the delegated validator to process a withdrawal.
+    &#34;&#34;&#34;
     delegated_validator = self._get_delegated_validator_by_id(pubkey)
     delegated_validator.process_withdrawal(delegator_index, amount)</code></pre>
 </details>
-<div class="desc"></div>
+<div class="desc"><p>This method uses the delegated validator to process a withdrawal.</p></div>
 </dd>
 </dl>
 </dd>
