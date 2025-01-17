@@ -8,7 +8,7 @@ from eods.custom_types import BLSPubkey, Gwei, DelegatorIndex
 
 class BeaconChainAccounting:
     """
-    This class is responsible for exposing the balance sheet operations - deposit to delegator balance, delegations toward and withdrawals.
+    This class is responsible for exposing the balance sheet operations - deposit, delegation and withdrawal.
     
     These are the different contexts of depositing/withdrawing:
         deposit_to_delegate_contract -> delegator balance : deposit_to_delegator_balance
