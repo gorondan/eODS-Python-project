@@ -36,8 +36,8 @@ class DelegatorsRegistry:
 
     def deposit(self, pubkey: BLSPubkey, amount: Gwei):
         """
-        This method adds an amount from a delegator's balance.
-        If there is no delegator for the specified pubkey it will be created.
+        This method adds an amount to a delegator's balance.
+        If there is no delegator for the specified pubkey, a delegator will be created.
         """
         
         # If delegator does not exist, register the new delegator
@@ -53,7 +53,7 @@ class DelegatorsRegistry:
 
     def withdraw(self, pubkey: BLSPubkey, amount: Gwei):
         """
-        This method adds an amount from a delegator's balance.
+        This method adds an amount to a delegator's balance.
         """
         delegator_index = self._get_delegator_index_by_id(pubkey)
 
