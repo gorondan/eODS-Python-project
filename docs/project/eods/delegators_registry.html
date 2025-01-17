@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1">
 <meta name="generator" content="pdoc3 0.11.5">
-<title>src.eods.delegators_registry API documentation</title>
+<title>project.eods.delegators_registry API documentation</title>
 <meta name="description" content="This module modifies the state of the delegators registry.">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/13.0.0/sanitize.min.css" integrity="sha512-y1dtMcuvtTMJc1yPgEqF0ZjQbhnc/bFhyvIyVNb9Zk5mIGtqVaAB1Ttl28su8AvFMOY0EwRbAe+HCLqj6W7/KA==" crossorigin>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/13.0.0/typography.min.css" integrity="sha512-Y1DYSb995BAfxobCkKepB1BqJJTPrOp3zPL74AWFugHHmmdcvO+C48WLrUOlhGMc0QG7AE3f7gmvvcrmX2fDoA==" crossorigin>
@@ -33,7 +33,7 @@ el.replaceWith(d);
 <main>
 <article id="content">
 <header>
-<h1 class="title">Module <code>src.eods.delegators_registry</code></h1>
+<h1 class="title">Module <code>project.eods.delegators_registry</code></h1>
 </header>
 <section id="section-intro">
 <p>This module modifies the state of the delegators registry.</p>
@@ -47,7 +47,7 @@ el.replaceWith(d);
 <section>
 <h2 class="section-title" id="header-classes">Classes</h2>
 <dl>
-<dt id="src.eods.delegators_registry.DelegatorsRegistry"><code class="flex name class">
+<dt id="project.eods.delegators_registry.DelegatorsRegistry"><code class="flex name class">
 <span>class <span class="ident">DelegatorsRegistry</span></span>
 </code></dt>
 <dd>
@@ -156,18 +156,18 @@ el.replaceWith(d);
 <div class="desc"><p>This class defines the registry used to manage delegators.</p></div>
 <h3>Class variables</h3>
 <dl>
-<dt id="src.eods.delegators_registry.DelegatorsRegistry.delegators"><code class="name">var <span class="ident">delegators</span> : List[eods.delegator.Delegator]</code></dt>
+<dt id="project.eods.delegators_registry.DelegatorsRegistry.delegators"><code class="name">var <span class="ident">delegators</span> : List[eods.delegator.Delegator]</code></dt>
 <dd>
 <div class="desc"></div>
 </dd>
-<dt id="src.eods.delegators_registry.DelegatorsRegistry.delegators_balances"><code class="name">var <span class="ident">delegators_balances</span> : List[numpy.uint64]</code></dt>
+<dt id="project.eods.delegators_registry.DelegatorsRegistry.delegators_balances"><code class="name">var <span class="ident">delegators_balances</span> : List[numpy.uint64]</code></dt>
 <dd>
 <div class="desc"></div>
 </dd>
 </dl>
 <h3>Methods</h3>
 <dl>
-<dt id="src.eods.delegators_registry.DelegatorsRegistry.decrease_delegator_balance"><code class="name flex">
+<dt id="project.eods.delegators_registry.DelegatorsRegistry.decrease_delegator_balance"><code class="name flex">
 <span>def <span class="ident">decrease_delegator_balance</span></span>(<span>self, delegator_index: numpy.uint64, amount: numpy.uint64)</span>
 </code></dt>
 <dd>
@@ -183,7 +183,7 @@ el.replaceWith(d);
 </details>
 <div class="desc"><p>This method removes an amount from a delegator's balance.</p></div>
 </dd>
-<dt id="src.eods.delegators_registry.DelegatorsRegistry.delegate_amount"><code class="name flex">
+<dt id="project.eods.delegators_registry.DelegatorsRegistry.delegate_amount"><code class="name flex">
 <span>def <span class="ident">delegate_amount</span></span>(<span>self, pubkey: ByteString, amount: numpy.uint64)</span>
 </code></dt>
 <dd>
@@ -209,7 +209,7 @@ el.replaceWith(d);
 </details>
 <div class="desc"><p>This method removes an amount from a delegator's balance.</p></div>
 </dd>
-<dt id="src.eods.delegators_registry.DelegatorsRegistry.deposit"><code class="name flex">
+<dt id="project.eods.delegators_registry.DelegatorsRegistry.deposit"><code class="name flex">
 <span>def <span class="ident">deposit</span></span>(<span>self, pubkey: ByteString, amount: numpy.uint64)</span>
 </code></dt>
 <dd>
@@ -237,7 +237,7 @@ el.replaceWith(d);
 <div class="desc"><p>This method adds an amount to a delegator's balance.
 If there is no delegator for the specified pubkey, a delegator will be created.</p></div>
 </dd>
-<dt id="src.eods.delegators_registry.DelegatorsRegistry.increase_delegator_balance"><code class="name flex">
+<dt id="project.eods.delegators_registry.DelegatorsRegistry.increase_delegator_balance"><code class="name flex">
 <span>def <span class="ident">increase_delegator_balance</span></span>(<span>self, delegator_index: numpy.uint64, amount: numpy.uint64)</span>
 </code></dt>
 <dd>
@@ -257,7 +257,7 @@ If there is no delegator for the specified pubkey, a delegator will be created.<
 </details>
 <div class="desc"><p>This method adds an amount to a delegator's balance.</p></div>
 </dd>
-<dt id="src.eods.delegators_registry.DelegatorsRegistry.withdraw"><code class="name flex">
+<dt id="project.eods.delegators_registry.DelegatorsRegistry.withdraw"><code class="name flex">
 <span>def <span class="ident">withdraw</span></span>(<span>self, pubkey: ByteString, amount: numpy.uint64)</span>
 </code></dt>
 <dd>
@@ -297,21 +297,21 @@ only the available amount will be returned.</p></div>
 <ul id="index">
 <li><h3>Super-module</h3>
 <ul>
-<li><code><a title="src.eods" href="index.html">src.eods</a></code></li>
+<li><code><a title="project.eods" href="index.html">project.eods</a></code></li>
 </ul>
 </li>
 <li><h3><a href="#header-classes">Classes</a></h3>
 <ul>
 <li>
-<h4><code><a title="src.eods.delegators_registry.DelegatorsRegistry" href="#src.eods.delegators_registry.DelegatorsRegistry">DelegatorsRegistry</a></code></h4>
+<h4><code><a title="project.eods.delegators_registry.DelegatorsRegistry" href="#project.eods.delegators_registry.DelegatorsRegistry">DelegatorsRegistry</a></code></h4>
 <ul class="">
-<li><code><a title="src.eods.delegators_registry.DelegatorsRegistry.decrease_delegator_balance" href="#src.eods.delegators_registry.DelegatorsRegistry.decrease_delegator_balance">decrease_delegator_balance</a></code></li>
-<li><code><a title="src.eods.delegators_registry.DelegatorsRegistry.delegate_amount" href="#src.eods.delegators_registry.DelegatorsRegistry.delegate_amount">delegate_amount</a></code></li>
-<li><code><a title="src.eods.delegators_registry.DelegatorsRegistry.delegators" href="#src.eods.delegators_registry.DelegatorsRegistry.delegators">delegators</a></code></li>
-<li><code><a title="src.eods.delegators_registry.DelegatorsRegistry.delegators_balances" href="#src.eods.delegators_registry.DelegatorsRegistry.delegators_balances">delegators_balances</a></code></li>
-<li><code><a title="src.eods.delegators_registry.DelegatorsRegistry.deposit" href="#src.eods.delegators_registry.DelegatorsRegistry.deposit">deposit</a></code></li>
-<li><code><a title="src.eods.delegators_registry.DelegatorsRegistry.increase_delegator_balance" href="#src.eods.delegators_registry.DelegatorsRegistry.increase_delegator_balance">increase_delegator_balance</a></code></li>
-<li><code><a title="src.eods.delegators_registry.DelegatorsRegistry.withdraw" href="#src.eods.delegators_registry.DelegatorsRegistry.withdraw">withdraw</a></code></li>
+<li><code><a title="project.eods.delegators_registry.DelegatorsRegistry.decrease_delegator_balance" href="#project.eods.delegators_registry.DelegatorsRegistry.decrease_delegator_balance">decrease_delegator_balance</a></code></li>
+<li><code><a title="project.eods.delegators_registry.DelegatorsRegistry.delegate_amount" href="#project.eods.delegators_registry.DelegatorsRegistry.delegate_amount">delegate_amount</a></code></li>
+<li><code><a title="project.eods.delegators_registry.DelegatorsRegistry.delegators" href="#project.eods.delegators_registry.DelegatorsRegistry.delegators">delegators</a></code></li>
+<li><code><a title="project.eods.delegators_registry.DelegatorsRegistry.delegators_balances" href="#project.eods.delegators_registry.DelegatorsRegistry.delegators_balances">delegators_balances</a></code></li>
+<li><code><a title="project.eods.delegators_registry.DelegatorsRegistry.deposit" href="#project.eods.delegators_registry.DelegatorsRegistry.deposit">deposit</a></code></li>
+<li><code><a title="project.eods.delegators_registry.DelegatorsRegistry.increase_delegator_balance" href="#project.eods.delegators_registry.DelegatorsRegistry.increase_delegator_balance">increase_delegator_balance</a></code></li>
+<li><code><a title="project.eods.delegators_registry.DelegatorsRegistry.withdraw" href="#project.eods.delegators_registry.DelegatorsRegistry.withdraw">withdraw</a></code></li>
 </ul>
 </li>
 </ul>

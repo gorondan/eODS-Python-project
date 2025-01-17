@@ -4,8 +4,9 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1">
 <meta name="generator" content="pdoc3 0.11.5">
-<title>src.eods.delegator API documentation</title>
-<meta name="description" content="This module defines the attributes of class delegator.">
+<title>project.eods API documentation</title>
+<meta name="description" content="This is the core module of the project, holding the basics of the logic behind eODS.
+It containins vital sub-modules like the registry of validators, …">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/13.0.0/sanitize.min.css" integrity="sha512-y1dtMcuvtTMJc1yPgEqF0ZjQbhnc/bFhyvIyVNb9Zk5mIGtqVaAB1Ttl28su8AvFMOY0EwRbAe+HCLqj6W7/KA==" crossorigin>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/13.0.0/typography.min.css" integrity="sha512-Y1DYSb995BAfxobCkKepB1BqJJTPrOp3zPL74AWFugHHmmdcvO+C48WLrUOlhGMc0QG7AE3f7gmvvcrmX2fDoA==" crossorigin>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/default.min.css" crossorigin>
@@ -33,40 +34,47 @@ el.replaceWith(d);
 <main>
 <article id="content">
 <header>
-<h1 class="title">Module <code>src.eods.delegator</code></h1>
+<h1 class="title">Module <code>project.eods</code></h1>
 </header>
 <section id="section-intro">
-<p>This module defines the attributes of class delegator.</p>
+<p>This is the core module of the project, holding the basics of the logic behind eODS.
+It containins vital sub-modules like the registry of validators, the registry of delegators,
+or the delegated validator and delegator classes.</p>
 </section>
 <section>
-</section>
-<section>
-</section>
-<section>
-</section>
-<section>
-<h2 class="section-title" id="header-classes">Classes</h2>
+<h2 class="section-title" id="header-submodules">Sub-modules</h2>
 <dl>
-<dt id="src.eods.delegator.Delegator"><code class="flex name class">
-<span>class <span class="ident">Delegator</span></span>
-</code></dt>
+<dt><code class="name"><a title="project.eods.beacon_chain_accounting" href="beacon_chain_accounting.html">project.eods.beacon_chain_accounting</a></code></dt>
 <dd>
-<details class="source">
-<summary>
-<span>Expand source code</span>
-</summary>
-<pre><code class="python">class Delegator:
-    def __init__(self):
-        self.pubkey = BLSPubkey # Unique identifier for each validator
-        self.withdrawal_credentials: bytes = b&#39;\x00&#39; * 32  # Commitment to pubkey for withdrawals
-        self.delegated_balance =  Gwei  # Balance at stake
-         # Status epochs
-        self.activation_epoch = Epoch
-        self.exit_epoch = Epoch</code></pre>
-</details>
-<div class="desc"></div>
+<div class="desc"><p>This module modifies the state of the beacon chain accounting protocol gadget.</p></div>
+</dd>
+<dt><code class="name"><a title="project.eods.custom_types" href="custom_types.html">project.eods.custom_types</a></code></dt>
+<dd>
+<div class="desc"><p>This module defines the custom types used by the program.</p></div>
+</dd>
+<dt><code class="name"><a title="project.eods.delegated_validator" href="delegated_validator.html">project.eods.delegated_validator</a></code></dt>
+<dd>
+<div class="desc"><p>This module defines the attributes of class delegated validator.</p></div>
+</dd>
+<dt><code class="name"><a title="project.eods.delegated_validators_registry" href="delegated_validators_registry.html">project.eods.delegated_validators_registry</a></code></dt>
+<dd>
+<div class="desc"><p>This module modifies the state of the delegated validators registry.</p></div>
+</dd>
+<dt><code class="name"><a title="project.eods.delegator" href="delegator.html">project.eods.delegator</a></code></dt>
+<dd>
+<div class="desc"><p>This module defines the attributes of class delegator.</p></div>
+</dd>
+<dt><code class="name"><a title="project.eods.delegators_registry" href="delegators_registry.html">project.eods.delegators_registry</a></code></dt>
+<dd>
+<div class="desc"><p>This module modifies the state of the delegators registry.</p></div>
 </dd>
 </dl>
+</section>
+<section>
+</section>
+<section>
+</section>
+<section>
 </section>
 </article>
 <nav id="sidebar">
@@ -76,14 +84,17 @@ el.replaceWith(d);
 <ul id="index">
 <li><h3>Super-module</h3>
 <ul>
-<li><code><a title="src.eods" href="index.html">src.eods</a></code></li>
+<li><code><a title="project" href="../index.html">project</a></code></li>
 </ul>
 </li>
-<li><h3><a href="#header-classes">Classes</a></h3>
+<li><h3><a href="#header-submodules">Sub-modules</a></h3>
 <ul>
-<li>
-<h4><code><a title="src.eods.delegator.Delegator" href="#src.eods.delegator.Delegator">Delegator</a></code></h4>
-</li>
+<li><code><a title="project.eods.beacon_chain_accounting" href="beacon_chain_accounting.html">project.eods.beacon_chain_accounting</a></code></li>
+<li><code><a title="project.eods.custom_types" href="custom_types.html">project.eods.custom_types</a></code></li>
+<li><code><a title="project.eods.delegated_validator" href="delegated_validator.html">project.eods.delegated_validator</a></code></li>
+<li><code><a title="project.eods.delegated_validators_registry" href="delegated_validators_registry.html">project.eods.delegated_validators_registry</a></code></li>
+<li><code><a title="project.eods.delegator" href="delegator.html">project.eods.delegator</a></code></li>
+<li><code><a title="project.eods.delegators_registry" href="delegators_registry.html">project.eods.delegators_registry</a></code></li>
 </ul>
 </li>
 </ul>
