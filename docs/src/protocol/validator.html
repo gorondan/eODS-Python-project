@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1">
 <meta name="generator" content="pdoc3 0.11.5">
 <title>src.protocol.validator API documentation</title>
-<meta name="description" content="">
+<meta name="description" content="This module contains the mocked Validator already present in the protocol.">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/13.0.0/sanitize.min.css" integrity="sha512-y1dtMcuvtTMJc1yPgEqF0ZjQbhnc/bFhyvIyVNb9Zk5mIGtqVaAB1Ttl28su8AvFMOY0EwRbAe+HCLqj6W7/KA==" crossorigin>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/13.0.0/typography.min.css" integrity="sha512-Y1DYSb995BAfxobCkKepB1BqJJTPrOp3zPL74AWFugHHmmdcvO+C48WLrUOlhGMc0QG7AE3f7gmvvcrmX2fDoA==" crossorigin>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/default.min.css" crossorigin>
@@ -36,6 +36,7 @@ el.replaceWith(d);
 <h1 class="title">Module <code>src.protocol.validator</code></h1>
 </header>
 <section id="section-intro">
+<p>This module contains the mocked Validator already present in the protocol.</p>
 </section>
 <section>
 </section>
@@ -55,6 +56,9 @@ el.replaceWith(d);
 <span>Expand source code</span>
 </summary>
 <pre><code class="python">class Validator:
+    &#34;&#34;&#34;
+    This class represents the mocked Validator already present in the protocol.
+    &#34;&#34;&#34;
     def __init__(self):
         self.pubkey = BLSPubkey # Unique identifier for each validator
         self.withdrawal_credentials: bytes = b&#39;\x00&#39; * 32  # Commitment to pubkey for withdrawals
@@ -68,7 +72,7 @@ el.replaceWith(d);
         self.delegated: bool # new in eODS
         self.fee_percentage: Fee # new in eODS</code></pre>
 </details>
-<div class="desc"></div>
+<div class="desc"><p>This class represents the mocked Validator already present in the protocol.</p></div>
 </dd>
 </dl>
 </section>
