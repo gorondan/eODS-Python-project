@@ -1,3 +1,6 @@
+"""
+This module contains the registry used to manage validators.
+"""
 from typing import List
 from eods.custom_types import Gwei, BLSPubkey
 from protocol.validator import Validator

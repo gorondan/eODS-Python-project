@@ -1,7 +1,13 @@
+"""
+This module contains the mocked Validator already present in the protocol.
+"""
 import numpy as np
 from eods.custom_types import Gwei, BLSPubkey, Epoch, Fee
 
 class Validator:
+    """
+    This class represents the mocked Validator already present in the protocol.
+    """
     def __init__(self):
         self.pubkey = BLSPubkey # Unique identifier for each validator
         self.withdrawal_credentials: bytes = b'\x00' * 32  # Commitment to pubkey for withdrawals
