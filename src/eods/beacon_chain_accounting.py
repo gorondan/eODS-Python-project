@@ -56,6 +56,8 @@ class BeaconChainAccounting:
             self.delegated_validators_registry.create_delegated_validator(validator, amount)
 
         self.delegated_validators_registry.process_delegation(delegator_index, validator.pubkey, amount)
+        
+        self.delegators_registry.decrease_delegator_balance(delegator_index, amount)
 
     def withdraw_from_validator(self, delegator_index: DelegatorIndex, validator_pubkey: BLSPubkey, amount: Gwei):
         """
@@ -76,4 +78,4 @@ class BeaconChainAccounting:
 
         withdrawal_amount = self.delegated_validators_registry.process_withdrawal(delegator_index, validator.pubkey, amount)
 
-        self.delegators_registry.withdraw(delegator_index, withdrawal_amount)
+        self.delegators_registry.increase_delegator_balance(delegator_index, withdrawal_amount)
