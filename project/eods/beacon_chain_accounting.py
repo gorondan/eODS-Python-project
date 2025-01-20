@@ -34,8 +34,12 @@ class BeaconChainAccounting:
         Args:
             delegator_index (DelegatorIndex): The index of the delegator.
             validator_pubkey (BLSPubkey): The public key of the validator.
-            amount (Gwei): The amount delegated.
+            amount (Gwei): The amount delegated, with added underflow protection
         """
+        if amount > self.delegators_registry.delegators_balances[delegator_index]:
+            amount = self.delegators_registry.delegators_balances[delegator_index]
+
+        self.delegators_registry.decrease_delegator_balance(delegator_index, amount)
         
         validator = self.validators_registry.get_validator_by_id(validator_pubkey)
 
@@ -43,8 +47,6 @@ class BeaconChainAccounting:
             self.delegated_validators_registry.create_delegated_validator(validator, amount)
 
         self.delegated_validators_registry.process_delegation(delegator_index, validator.pubkey, amount)
-        
-        self.delegators_registry.decrease_delegator_balance(delegator_index, amount)
 
     def deposit_to_delegator_balance(self, pubkey: BLSPubkey, amount: Gwei):
         """
