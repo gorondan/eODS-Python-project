@@ -13,7 +13,6 @@ class Tester:
     
     def __init__(self, beacon_chain_accounting):
         self.beacon_chain_accounting = beacon_chain_accounting
-        
   
     def test_quotas_sum_to_be_1(self):
         """
@@ -47,3 +46,13 @@ class Tester:
                     return False
                 
         return True 
+    
+    def test_delegators_balances_are_positive(self):
+        
+        delegators_balances = self.beacon_chain_accounting.delegators_registry.delegators_balances
+        for balance in delegators_balances:
+             if balance < 0:
+                return False
+        
+        return True
+    

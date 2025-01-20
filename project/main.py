@@ -4,6 +4,7 @@ that will serve as the cornerstone for eODS.
 """
 
 from eods.beacon_chain_accounting import BeaconChainAccounting
+from eods.delegators_registry import DelegatorsRegistry
 from simulator import Simulator
 from simulation_constants import num_ticks
 from tester import Tester
@@ -36,5 +37,6 @@ class Main:
     tester = Tester(beacon_chain_accounting)
     assert tester.test_quotas_sum_to_be_1()
     assert tester.test_delegated_amount_is_positive()
+    assert tester.test_delegators_balances_are_positive()
 
 run = Main()
