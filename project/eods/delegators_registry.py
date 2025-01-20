@@ -18,21 +18,11 @@ class DelegatorsRegistry:
         self.delegators = []
         self.delegators_balances = [] # Max size: DELEGATOR_REGISTRY_LIMIT
 
-    def delegate_amount(self, pubkey: BLSPubkey, amount: Gwei):
+    def decrease_delegator_balance(self, delegator_index: DelegatorIndex, amount: Gwei):
         """
         This method removes an amount from a delegator's balance.
         """
-        delegator_index = self._get_delegator_index_by_id(pubkey)
-
-        if amount <= 0:
-            raise ValueError("Delegated amount must be positive.")
-
-        # Ensure the withdrawal amount does not exceed the delegator's balance in the validator
-        if amount > self.delegators_balances[delegator_index]:
-            raise ValueError("Delegated amount exceeds the delegator's balance.")
-
-        # Removes the delegated amount from the delegator's balance
-        self.delegators_balances[delegator_index] -= amount
+        self.delegators_balances[delegator_index] -= amount    
 
     def deposit(self, pubkey: BLSPubkey, amount: Gwei):
         """
@@ -50,7 +40,17 @@ class DelegatorsRegistry:
 
         # Add the deposit amount to the delegator's balance
         self.delegators_balances[delegator_index] += amount
-    
+
+    def increase_delegator_balance(self, delegator_index: DelegatorIndex, amount: Gwei):
+        """
+        This method adds an amount to a delegator's balance.
+        """
+
+        if amount < 0:
+            raise ValueError("Amount must be positive.")
+
+        self.delegators_balances[delegator_index] += amount
+
     def withdraw(self, pubkey: BLSPubkey, amount: Gwei):
         """
         This method withdraws an amount from a delegator's balance.
@@ -65,23 +65,7 @@ class DelegatorsRegistry:
         if(amount_to_withdraw > self.delegators_balances[delegator_index]):
             amount_to_withdraw = self.delegators_balances[delegator_index]
             
-        self.delegators_balances[delegator_index] -= amount_to_withdraw    
-
-    def increase_delegator_balance(self, delegator_index: DelegatorIndex, amount: Gwei):
-        """
-        This method adds an amount to a delegator's balance.
-        """
-
-        if amount < 0:
-            raise ValueError("Amount must be positive.")
-
-        self.delegators_balances[delegator_index] += amount
-        
-    def decrease_delegator_balance(self, delegator_index: DelegatorIndex, amount: Gwei):
-        """
-        This method removes an amount from a delegator's balance.
-        """
-        self.delegators_balances[delegator_index] -= amount    
+        self.delegators_balances[delegator_index] -= amount_to_withdraw
 
     def _get_delegator_index_by_id(self, pubkey : BLSPubkey):
         """Helper function to find a validator's index by its ID."""

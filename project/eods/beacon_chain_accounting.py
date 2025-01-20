@@ -26,6 +26,28 @@ class BeaconChainAccounting:
         self.validators_registry = ValidatorsRegistry()
         self.delegated_validators_registry = DelegatedValidatorsRegistry()
 
+    def delegate_to_validator(self, delegator_index: DelegatorIndex, validator_pubkey: BLSPubkey, amount: Gwei):
+        """
+        This method acts as an entrypoint for delegation. It creates a delegated validator if needed and 
+        it funds it with a given amount.
+        
+        Args:
+            delegator_index (DelegatorIndex): The index of the delegator.
+            validator_pubkey (BLSPubkey): The public key of the validator.
+            amount (Gwei): The amount delegated, with added underflow protection
+        """
+        if amount > self.delegators_registry.delegators_balances[delegator_index]:
+            amount = self.delegators_registry.delegators_balances[delegator_index]
+
+        self.delegators_registry.decrease_delegator_balance(delegator_index, amount)
+        
+        validator = self.validators_registry.get_validator_by_id(validator_pubkey)
+
+        if not self.delegated_validators_registry.is_validator_delegated(validator.pubkey):
+            self.delegated_validators_registry.create_delegated_validator(validator, amount)
+
+        self.delegated_validators_registry.process_delegation(delegator_index, validator.pubkey, amount)
+
     def deposit_to_delegator_balance(self, pubkey: BLSPubkey, amount: Gwei):
         """
         This method will deposit an amount to a delegator's balance.
@@ -38,26 +60,6 @@ class BeaconChainAccounting:
         This method facilitates withdrawal from a delegator's balance.
         """
         self.delegators_registry.withdraw(pubkey, amount)
-
-    def delegate_to_validator(self, delegator_index: DelegatorIndex, validator_pubkey: BLSPubkey, amount: Gwei):
-        """
-        This method acts as an entrypoint for delegation. It creates a delegated validator if needed and 
-        it funds it with a given amount.
-        
-        Args:
-            delegator_index (DelegatorIndex): The index of the delegator.
-            validator_pubkey (BLSPubkey): The public key of the validator.
-            amount (Gwei): The amount delegated.
-        """
-        
-        validator = self.validators_registry.get_validator_by_id(validator_pubkey)
-
-        if not self.delegated_validators_registry.is_validator_delegated(validator.pubkey):
-            self.delegated_validators_registry.create_delegated_validator(validator, amount)
-
-        self.delegated_validators_registry.process_delegation(delegator_index, validator.pubkey, amount)
-        
-        self.delegators_registry.decrease_delegator_balance(delegator_index, amount)
 
     def withdraw_from_validator(self, delegator_index: DelegatorIndex, validator_pubkey: BLSPubkey, amount: Gwei):
         """
