@@ -1,2 +1,2 @@
 #!/bin/bash
-python3.10 src/main.py
+python3.10 project/main.py
