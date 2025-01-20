@@ -57,7 +57,7 @@ el.replaceWith(d);
 </summary>
 <pre><code class="python">class BeaconChainAccounting:
     &#34;&#34;&#34;
-    This class is responsible for exposing the balance sheet operations - deposit to delegator balance, delegations toward and withdrawals.
+    This class is responsible for exposing the balance sheet operations - deposit, delegation and withdrawal.
     
     These are the different contexts of depositing/withdrawing:
         deposit_to_delegate_contract -&gt; delegator balance : deposit_to_delegator_balance
@@ -75,6 +75,28 @@ el.replaceWith(d);
         self.validators_registry = ValidatorsRegistry()
         self.delegated_validators_registry = DelegatedValidatorsRegistry()
 
+    def delegate_to_validator(self, delegator_index: DelegatorIndex, validator_pubkey: BLSPubkey, amount: Gwei):
+        &#34;&#34;&#34;
+        This method acts as an entrypoint for delegation. It creates a delegated validator if needed and 
+        it funds it with a given amount.
+        
+        Args:
+            delegator_index (DelegatorIndex): The index of the delegator.
+            validator_pubkey (BLSPubkey): The public key of the validator.
+            amount (Gwei): The amount delegated, with added underflow protection
+        &#34;&#34;&#34;
+        if amount &gt; self.delegators_registry.delegators_balances[delegator_index]:
+            amount = self.delegators_registry.delegators_balances[delegator_index]
+
+        self.delegators_registry.decrease_delegator_balance(delegator_index, amount)
+        
+        validator = self.validators_registry.get_validator_by_id(validator_pubkey)
+
+        if not self.delegated_validators_registry.is_validator_delegated(validator.pubkey):
+            self.delegated_validators_registry.create_delegated_validator(validator, amount)
+
+        self.delegated_validators_registry.process_delegation(delegator_index, validator.pubkey, amount)
+
     def deposit_to_delegator_balance(self, pubkey: BLSPubkey, amount: Gwei):
         &#34;&#34;&#34;
         This method will deposit an amount to a delegator&#39;s balance.
@@ -87,26 +109,6 @@ el.replaceWith(d);
         This method facilitates withdrawal from a delegator&#39;s balance.
         &#34;&#34;&#34;
         self.delegators_registry.withdraw(pubkey, amount)
-
-    def delegate_to_validator(self, delegator_index: DelegatorIndex, validator_pubkey: BLSPubkey, amount: Gwei):
-        &#34;&#34;&#34;
-        This method acts as an entrypoint for delegation. It creates a delegated validator if needed and 
-        it funds it with a given amount.
-        
-        Args:
-            delegator_index (DelegatorIndex): The index of the delegator.
-            validator_pubkey (BLSPubkey): The public key of the validator.
-            amount (Gwei): The amount delegated.
-        &#34;&#34;&#34;
-        
-        validator = self.validators_registry.get_validator_by_id(validator_pubkey)
-
-        if not self.delegated_validators_registry.is_validator_delegated(validator.pubkey):
-            self.delegated_validators_registry.create_delegated_validator(validator, amount)
-
-        self.delegated_validators_registry.process_delegation(delegator_index, validator.pubkey, amount)
-        
-        self.delegators_registry.decrease_delegator_balance(delegator_index, amount)
 
     def withdraw_from_validator(self, delegator_index: DelegatorIndex, validator_pubkey: BLSPubkey, amount: Gwei):
         &#34;&#34;&#34;
@@ -129,7 +131,7 @@ el.replaceWith(d);
 
         self.delegators_registry.increase_delegator_balance(delegator_index, withdrawal_amount)</code></pre>
 </details>
-<div class="desc"><p>This class is responsible for exposing the balance sheet operations - deposit to delegator balance, delegations toward and withdrawals.</p>
+<div class="desc"><p>This class is responsible for exposing the balance sheet operations - deposit, delegation and withdrawal.</p>
 <p>These are the different contexts of depositing/withdrawing:
 deposit_to_delegate_contract -&gt; delegator balance : deposit_to_delegator_balance
 ExecutionAddress &lt;- delegator balance : withdraw_from_delegator_balance
@@ -168,17 +170,19 @@ delegator balance &lt;- validator : withdraw_from_validator</p></div>
     Args:
         delegator_index (DelegatorIndex): The index of the delegator.
         validator_pubkey (BLSPubkey): The public key of the validator.
-        amount (Gwei): The amount delegated.
+        amount (Gwei): The amount delegated, with added underflow protection
     &#34;&#34;&#34;
+    if amount &gt; self.delegators_registry.delegators_balances[delegator_index]:
+        amount = self.delegators_registry.delegators_balances[delegator_index]
+
+    self.delegators_registry.decrease_delegator_balance(delegator_index, amount)
     
     validator = self.validators_registry.get_validator_by_id(validator_pubkey)
 
     if not self.delegated_validators_registry.is_validator_delegated(validator.pubkey):
         self.delegated_validators_registry.create_delegated_validator(validator, amount)
 
-    self.delegated_validators_registry.process_delegation(delegator_index, validator.pubkey, amount)
-    
-    self.delegators_registry.decrease_delegator_balance(delegator_index, amount)</code></pre>
+    self.delegated_validators_registry.process_delegation(delegator_index, validator.pubkey, amount)</code></pre>
 </details>
 <div class="desc"><p>This method acts as an entrypoint for delegation. It creates a delegated validator if needed and
 it funds it with a given amount.</p>
@@ -189,7 +193,7 @@ it funds it with a given amount.</p>
 <dt><strong><code>validator_pubkey</code></strong> :&ensp;<code>BLSPubkey</code></dt>
 <dd>The public key of the validator.</dd>
 <dt><strong><code>amount</code></strong> :&ensp;<code>Gwei</code></dt>
-<dd>The amount delegated.</dd>
+<dd>The amount delegated, with added underflow protection</dd>
 </dl></div>
 </dd>
 <dt id="project.eods.beacon_chain_accounting.BeaconChainAccounting.deposit_to_delegator_balance"><code class="name flex">

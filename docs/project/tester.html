@@ -65,7 +65,6 @@ el.replaceWith(d);
     
     def __init__(self, beacon_chain_accounting):
         self.beacon_chain_accounting = beacon_chain_accounting
-        
   
     def test_quotas_sum_to_be_1(self):
         &#34;&#34;&#34;
@@ -98,7 +97,16 @@ el.replaceWith(d);
                 if amount &lt; 0:
                     return False
                 
-        return True </code></pre>
+        return True 
+    
+    def test_delegators_balances_are_positive(self):
+        
+        delegators_balances = self.beacon_chain_accounting.delegators_registry.delegators_balances
+        for balance in delegators_balances:
+             if balance &lt; 0:
+                return False
+        
+        return True</code></pre>
 </details>
 <div class="desc"><p>This class evaluates the generated data to ensure its consistency and correctness.</p></div>
 <h3>Class variables</h3>
@@ -132,6 +140,25 @@ el.replaceWith(d);
     return True </code></pre>
 </details>
 <div class="desc"><p>This method tests if every delegated amount is a positive value.</p></div>
+</dd>
+<dt id="project.tester.Tester.test_delegators_balances_are_positive"><code class="name flex">
+<span>def <span class="ident">test_delegators_balances_are_positive</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def test_delegators_balances_are_positive(self):
+    
+    delegators_balances = self.beacon_chain_accounting.delegators_registry.delegators_balances
+    for balance in delegators_balances:
+         if balance &lt; 0:
+            return False
+    
+    return True</code></pre>
+</details>
+<div class="desc"></div>
 </dd>
 <dt id="project.tester.Tester.test_quotas_sum_to_be_1"><code class="name flex">
 <span>def <span class="ident">test_quotas_sum_to_be_1</span></span>(<span>self)</span>
@@ -185,6 +212,7 @@ el.replaceWith(d);
 <ul class="">
 <li><code><a title="project.tester.Tester.beacon_chain_accounting" href="#project.tester.Tester.beacon_chain_accounting">beacon_chain_accounting</a></code></li>
 <li><code><a title="project.tester.Tester.test_delegated_amount_is_positive" href="#project.tester.Tester.test_delegated_amount_is_positive">test_delegated_amount_is_positive</a></code></li>
+<li><code><a title="project.tester.Tester.test_delegators_balances_are_positive" href="#project.tester.Tester.test_delegators_balances_are_positive">test_delegators_balances_are_positive</a></code></li>
 <li><code><a title="project.tester.Tester.test_quotas_sum_to_be_1" href="#project.tester.Tester.test_quotas_sum_to_be_1">test_quotas_sum_to_be_1</a></code></li>
 </ul>
 </li>

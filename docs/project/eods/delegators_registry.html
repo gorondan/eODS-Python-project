@@ -67,21 +67,11 @@ el.replaceWith(d);
         self.delegators = []
         self.delegators_balances = [] # Max size: DELEGATOR_REGISTRY_LIMIT
 
-    def delegate_amount(self, pubkey: BLSPubkey, amount: Gwei):
+    def decrease_delegator_balance(self, delegator_index: DelegatorIndex, amount: Gwei):
         &#34;&#34;&#34;
         This method removes an amount from a delegator&#39;s balance.
         &#34;&#34;&#34;
-        delegator_index = self._get_delegator_index_by_id(pubkey)
-
-        if amount &lt;= 0:
-            raise ValueError(&#34;Delegated amount must be positive.&#34;)
-
-        # Ensure the withdrawal amount does not exceed the delegator&#39;s balance in the validator
-        if amount &gt; self.delegators_balances[delegator_index]:
-            raise ValueError(&#34;Delegated amount exceeds the delegator&#39;s balance.&#34;)
-
-        # Removes the delegated amount from the delegator&#39;s balance
-        self.delegators_balances[delegator_index] -= amount
+        self.delegators_balances[delegator_index] -= amount    
 
     def deposit(self, pubkey: BLSPubkey, amount: Gwei):
         &#34;&#34;&#34;
@@ -99,7 +89,17 @@ el.replaceWith(d);
 
         # Add the deposit amount to the delegator&#39;s balance
         self.delegators_balances[delegator_index] += amount
-    
+
+    def increase_delegator_balance(self, delegator_index: DelegatorIndex, amount: Gwei):
+        &#34;&#34;&#34;
+        This method adds an amount to a delegator&#39;s balance.
+        &#34;&#34;&#34;
+
+        if amount &lt; 0:
+            raise ValueError(&#34;Amount must be positive.&#34;)
+
+        self.delegators_balances[delegator_index] += amount
+
     def withdraw(self, pubkey: BLSPubkey, amount: Gwei):
         &#34;&#34;&#34;
         This method withdraws an amount from a delegator&#39;s balance.
@@ -114,23 +114,7 @@ el.replaceWith(d);
         if(amount_to_withdraw &gt; self.delegators_balances[delegator_index]):
             amount_to_withdraw = self.delegators_balances[delegator_index]
             
-        self.delegators_balances[delegator_index] -= amount_to_withdraw    
-
-    def increase_delegator_balance(self, delegator_index: DelegatorIndex, amount: Gwei):
-        &#34;&#34;&#34;
-        This method adds an amount to a delegator&#39;s balance.
-        &#34;&#34;&#34;
-
-        if amount &lt; 0:
-            raise ValueError(&#34;Amount must be positive.&#34;)
-
-        self.delegators_balances[delegator_index] += amount
-        
-    def decrease_delegator_balance(self, delegator_index: DelegatorIndex, amount: Gwei):
-        &#34;&#34;&#34;
-        This method removes an amount from a delegator&#39;s balance.
-        &#34;&#34;&#34;
-        self.delegators_balances[delegator_index] -= amount    
+        self.delegators_balances[delegator_index] -= amount_to_withdraw
 
     def _get_delegator_index_by_id(self, pubkey : BLSPubkey):
         &#34;&#34;&#34;Helper function to find a validator&#39;s index by its ID.&#34;&#34;&#34;
@@ -180,32 +164,6 @@ el.replaceWith(d);
     This method removes an amount from a delegator&#39;s balance.
     &#34;&#34;&#34;
     self.delegators_balances[delegator_index] -= amount    </code></pre>
-</details>
-<div class="desc"><p>This method removes an amount from a delegator's balance.</p></div>
-</dd>
-<dt id="project.eods.delegators_registry.DelegatorsRegistry.delegate_amount"><code class="name flex">
-<span>def <span class="ident">delegate_amount</span></span>(<span>self, pubkey: ByteString, amount: numpy.uint64)</span>
-</code></dt>
-<dd>
-<details class="source">
-<summary>
-<span>Expand source code</span>
-</summary>
-<pre><code class="python">def delegate_amount(self, pubkey: BLSPubkey, amount: Gwei):
-    &#34;&#34;&#34;
-    This method removes an amount from a delegator&#39;s balance.
-    &#34;&#34;&#34;
-    delegator_index = self._get_delegator_index_by_id(pubkey)
-
-    if amount &lt;= 0:
-        raise ValueError(&#34;Delegated amount must be positive.&#34;)
-
-    # Ensure the withdrawal amount does not exceed the delegator&#39;s balance in the validator
-    if amount &gt; self.delegators_balances[delegator_index]:
-        raise ValueError(&#34;Delegated amount exceeds the delegator&#39;s balance.&#34;)
-
-    # Removes the delegated amount from the delegator&#39;s balance
-    self.delegators_balances[delegator_index] -= amount</code></pre>
 </details>
 <div class="desc"><p>This method removes an amount from a delegator's balance.</p></div>
 </dd>
@@ -279,7 +237,7 @@ If there is no delegator for the specified pubkey, a delegator will be created.<
     if(amount_to_withdraw &gt; self.delegators_balances[delegator_index]):
         amount_to_withdraw = self.delegators_balances[delegator_index]
         
-    self.delegators_balances[delegator_index] -= amount_to_withdraw    </code></pre>
+    self.delegators_balances[delegator_index] -= amount_to_withdraw</code></pre>
 </details>
 <div class="desc"><p>This method withdraws an amount from a delegator's balance.
 If the requested amount is larger than the available amount,
@@ -306,7 +264,6 @@ only the available amount will be returned.</p></div>
 <h4><code><a title="project.eods.delegators_registry.DelegatorsRegistry" href="#project.eods.delegators_registry.DelegatorsRegistry">DelegatorsRegistry</a></code></h4>
 <ul class="">
 <li><code><a title="project.eods.delegators_registry.DelegatorsRegistry.decrease_delegator_balance" href="#project.eods.delegators_registry.DelegatorsRegistry.decrease_delegator_balance">decrease_delegator_balance</a></code></li>
-<li><code><a title="project.eods.delegators_registry.DelegatorsRegistry.delegate_amount" href="#project.eods.delegators_registry.DelegatorsRegistry.delegate_amount">delegate_amount</a></code></li>
 <li><code><a title="project.eods.delegators_registry.DelegatorsRegistry.delegators" href="#project.eods.delegators_registry.DelegatorsRegistry.delegators">delegators</a></code></li>
 <li><code><a title="project.eods.delegators_registry.DelegatorsRegistry.delegators_balances" href="#project.eods.delegators_registry.DelegatorsRegistry.delegators_balances">delegators_balances</a></code></li>
 <li><code><a title="project.eods.delegators_registry.DelegatorsRegistry.deposit" href="#project.eods.delegators_registry.DelegatorsRegistry.deposit">deposit</a></code></li>
