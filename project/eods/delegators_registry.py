@@ -8,7 +8,8 @@ from eods.delegator import Delegator
 
 class DelegatorsRegistry:
     """
-    This class defines the registry used to manage delegators.
+    This class defines the registry used to manage delegators. It handles delegators life cycle and exposes the
+    deposit and withdraw functionality.
     """
     delegators: List[Delegator]  # Stores delegators' data as a list of Delegator instances.
     delegators_balances: List[Gwei]  # List of Gwei delegators' balances
